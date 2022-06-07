@@ -15,19 +15,14 @@ namespace Player
 
         private CharacterController characterController;
 
+
         // Start is called before the first frame update
         void Start()
         {
             input = InputFactory.Instance.GetInputController();
             characterController = GetComponent<CharacterController>();
-
-            input.UseKeyDown += OnUse;
         }
 
-        private void OnUse()
-        {
-            Debug.Log("Use key button");
-        }
 
         // Update is called once per frame
         void Update()
@@ -38,6 +33,9 @@ namespace Player
 
             if (movement != Vector3.zero)
                 transform.rotation = Quaternion.LookRotation(movement, Vector3.up);
+
+            if (!characterController.isGrounded)
+                movement = new Vector3(movement.x, -10, movement.z);
                 
             characterController.Move(movement);
         }

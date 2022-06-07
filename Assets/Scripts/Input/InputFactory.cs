@@ -10,7 +10,7 @@ namespace InputSystem
 
         public static InputFactory Instance { get; private set; }
 
-        private void Start()
+        private void Awake()
         {
             if (Instance == null)
                 Instance = this;

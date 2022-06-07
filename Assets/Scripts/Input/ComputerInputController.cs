@@ -20,7 +20,10 @@ namespace InputSystem
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log("Use key button down (from ComputerController)");
                 UseKeyDown?.Invoke();
+            }
         }
     }
 }
