@@ -4,11 +4,21 @@ using UnityEngine;
 
 namespace InputSystem
 {
-    public class InputFactory
+    public class InputFactory : MonoBehaviour
     {
-        public static IInputController GetInputController()
+        [SerializeField] ComputerInputController inputController;
+
+        public static InputFactory Instance { get; private set; }
+
+        private void Start()
         {
-            return new ComputerInputController();
+            if (Instance == null)
+                Instance = this;
+        }
+
+        public IInputController GetInputController()
+        {
+            return inputController;
         }
     }
 }
