@@ -7577,6 +7577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1846471020}
   - component: {fileID: 1846471019}
+  - component: {fileID: 1846471021}
   m_Layer: 0
   m_Name: QuestCreator
   m_TagString: Untagged
@@ -7596,9 +7597,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ac85bcff2bc5f4b84f90145739aee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: "\u041A\u0432\u0435\u0441\u0442"
-  Description: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435"
-  id: 0
+  Title: "\u041A\u0432\u0435\u0441\u04422"
+  Description: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u04352"
+  id: 1
   condition:
     id: 0
   references:
@@ -7622,6 +7623,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1846471021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846471018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e885f917a94314587a9a1230d6fa92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questID: 1
+  quest:
+    Title: "\u041A\u0432\u0435\u0441\u04422"
+    Description: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u04352"
+    id: 1
+    Condition:
+      id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: MailCondition, ns: Conditions, asm: Assembly-CSharp}
+      data:
+        targetID: 0
+        subjectID: -1
 --- !u!1 &1919003924
 GameObject:
   m_ObjectHideFlags: 0

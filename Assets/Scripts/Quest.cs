@@ -9,5 +9,5 @@ public class Quest
     public string Title;
     public string Description;
     public int id;
-    public Conditions.Condition Condition;
+    [SerializeReference] public Conditions.Condition Condition;
 }
