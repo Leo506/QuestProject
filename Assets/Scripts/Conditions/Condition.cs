@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Conditions
 {
+    [System.Serializable]
     public abstract class Condition
     {
         public static event System.Action<int> OnPass;
