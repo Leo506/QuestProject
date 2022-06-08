@@ -11,6 +11,7 @@ public class MailConditionPropertyDrawer : PropertyDrawer
     {
         EditorGUI.BeginProperty(position, label, property);
 
+
         var mailTarget = property.FindPropertyRelative("target");
         var subject = property.FindPropertyRelative("subject");
 

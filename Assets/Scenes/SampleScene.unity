@@ -7596,12 +7596,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ac85bcff2bc5f4b84f90145739aee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: 123
-  Description: 123
+  Title: 
+  Description: 
   id: 0
   condition:
-    target: {fileID: 0}
-    subject: {fileID: 0}
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: MailCondition, ns: Conditions, asm: Assembly-CSharp}
+      data:
+        target: {fileID: 1338037790}
+        subject: 42
 --- !u!4 &1846471020
 Transform:
   m_ObjectHideFlags: 0

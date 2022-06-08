@@ -25,15 +25,33 @@ public class QuestCreatorEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        QuestCreator creator = serializedObject.targetObject as QuestCreator;
+
         EditorGUILayout.PropertyField(titleProperty);
+
+        EditorGUILayout.DelayedTextField(creator.Description);
         EditorGUILayout.PropertyField(descriptionProperty);
         EditorGUILayout.PropertyField(idProperty);
 
         string[] options = { (new MailCondition()).GetConditionName() };
 
-        index = EditorGUILayout.Popup(index, options);
+        var newIndex = EditorGUILayout.Popup(index, options);
+
+        // TODO изменение отображаемого условия при изменении выбранного типа
+
+        /*if (newIndex != index)
+        {
+
+            //QuestCreator creator = serializedObject.targetObject as QuestCreator;
+            //creator.condition = new MailCondition();
+            conditionProperty.managedReferenceValue = new MailCondition();
+            index = newIndex;
+            Debug.Log("Change to new");
+        }*/
+
 
         EditorGUILayout.PropertyField(conditionProperty);
+        serializedObject.ApplyModifiedProperties();
 
     }
 }

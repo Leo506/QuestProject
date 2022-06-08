@@ -6,7 +6,7 @@ public class QuestCreator : MonoBehaviour
 {
     [Header("Создание квеста")]
     [SerializeField] string Title;
-    [SerializeField] string Description;
+    [SerializeField] public string Description;
     [SerializeField] int id;
     [SerializeReference] public Conditions.Condition condition = new Conditions.MailCondition();
 }

@@ -7,13 +7,13 @@ namespace Conditions
     [System.Serializable]
     public class MailCondition : Condition
     {
-        public GameObject target;
-        public GameObject subject;
+        [SerializeField] public GameObject target;
+        [SerializeField] public int subject;
 
         public MailCondition()
         {
             target = null;
-            subject = null;
+            subject = 0;
         }
 
         public override string GetConditionName() => "Почтовый квест";
