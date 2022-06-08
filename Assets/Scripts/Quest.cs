@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // TODO подумать, можно ли сделать структурой
+[System.Serializable]
 public class Quest
 {
     public string Title;

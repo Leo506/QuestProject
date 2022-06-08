@@ -29,7 +29,6 @@ public class QuestCreatorEditor : Editor
 
         EditorGUILayout.PropertyField(titleProperty);
 
-        EditorGUILayout.DelayedTextField(creator.Description);
         EditorGUILayout.PropertyField(descriptionProperty);
         EditorGUILayout.PropertyField(idProperty);
 
@@ -52,6 +51,11 @@ public class QuestCreatorEditor : Editor
 
         EditorGUILayout.PropertyField(conditionProperty);
         serializedObject.ApplyModifiedProperties();
+
+        if (GUILayout.Button("Создать квест"))
+        {
+            creator.CreateQuest();
+        }
 
     }
 }
