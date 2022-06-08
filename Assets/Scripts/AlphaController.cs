@@ -28,7 +28,8 @@ public class AlphaController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.gameObject != target)
+                Debug.Log("Tag: " + hit.collider.gameObject.tag + " Object: " + hit.collider.gameObject.name);
+                if (hit.collider.gameObject != target && hit.collider.gameObject.tag == "Transparent")
                 {
                     MeshRenderer renderer = hit.collider.gameObject.GetComponent<MeshRenderer>();
                     var color = renderer.material.color;
