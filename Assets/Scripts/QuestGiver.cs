@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class QuestGiver : MonoBehaviour, IUsable
 {
+    [SerializeField] int npcID;
     public void Use()
     {
-        Debug.Log("Quest is given");
+        if (QuestManager.CurrentQuest.GiverID == npcID)
+        {
+            Debug.Log("Quest is given");
+            QuestManager.CurrentQuest.State = QuestState.IN_PROGRESS;
+        }
     }
 }

@@ -6213,6 +6213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1b498804b1e694d8dc3f916018b2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcID: 0
 --- !u!65 &1338037792
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7597,9 +7598,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ac85bcff2bc5f4b84f90145739aee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: "\u041A\u0432\u0435\u0441\u04422"
-  Description: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u04352"
-  id: 1
+  Title: "\u041A\u0432\u0435\u0441\u0442"
+  Description: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435"
+  id: 0
+  GiverID: 0
+  State: 0
   condition:
     id: 0
   references:
@@ -7607,7 +7610,7 @@ MonoBehaviour:
     00000000:
       type: {class: MailCondition, ns: Conditions, asm: Assembly-CSharp}
       data:
-        targetID: 0
+        targetID: 1
         subjectID: -1
 --- !u!4 &1846471020
 Transform:
@@ -7635,11 +7638,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e885f917a94314587a9a1230d6fa92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questID: 1
+  questID: 0
   quest:
-    Title: "\u041A\u0432\u0435\u0441\u04422"
-    Description: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u04352"
-    id: 1
+    Title: "\u041A\u0432\u0435\u0441\u0442"
+    Description: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435"
+    id: 0
+    GiverID: 0
+    State: 0
     Condition:
       id: 0
   references:
@@ -7647,7 +7652,7 @@ MonoBehaviour:
     00000000:
       type: {class: MailCondition, ns: Conditions, asm: Assembly-CSharp}
       data:
-        targetID: 0
+        targetID: 1
         subjectID: -1
 --- !u!1 &1919003924
 GameObject:

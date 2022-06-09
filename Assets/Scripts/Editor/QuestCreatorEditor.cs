@@ -14,6 +14,8 @@ public class QuestCreatorEditor : Editor
     SerializedProperty titleProperty;
     SerializedProperty descriptionProperty;
     SerializedProperty idProperty;
+    SerializedProperty giverIdProperty;
+    SerializedProperty stateProperty;
 
     private void OnEnable()
     {
@@ -21,6 +23,8 @@ public class QuestCreatorEditor : Editor
         titleProperty = serializedObject.FindProperty("Title");
         descriptionProperty = serializedObject.FindProperty("Description");
         idProperty = serializedObject.FindProperty("id");
+        giverIdProperty = serializedObject.FindProperty("GiverID");
+        stateProperty = serializedObject.FindProperty("State");
     }
 
     public override void OnInspectorGUI()
@@ -31,6 +35,8 @@ public class QuestCreatorEditor : Editor
 
         EditorGUILayout.PropertyField(descriptionProperty);
         EditorGUILayout.PropertyField(idProperty);
+        EditorGUILayout.PropertyField(giverIdProperty);
+        EditorGUILayout.PropertyField(stateProperty);
 
         string[] options = { (new MailCondition()).GetConditionName() };
 

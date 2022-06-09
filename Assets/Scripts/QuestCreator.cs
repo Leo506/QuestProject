@@ -10,6 +10,8 @@ public class QuestCreator : MonoBehaviour
     [SerializeField] string Title;
     [SerializeField] public string Description;
     [SerializeField] int id;
+    [SerializeField] int GiverID;
+    [SerializeField] QuestState State;
     [SerializeReference] public Conditions.Condition condition = new Conditions.MailCondition();
 
     public void CreateQuest()
