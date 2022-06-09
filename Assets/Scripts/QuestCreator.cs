@@ -21,6 +21,7 @@ public class QuestCreator : MonoBehaviour
         quest.Description = Description;
         quest.Title = Title;
         quest.Condition = condition;
+        quest.GiverID = GiverID;
 
         using (FileStream fs = File.Create(Application.streamingAssetsPath + $"/Quests/Quest{id}"))
         {

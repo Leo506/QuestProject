@@ -19,8 +19,6 @@ public class Quest
     public int GiverID;
 
     private QuestState _state;
-
-    [SerializeField]
     public QuestState State
     {
         get => _state;
