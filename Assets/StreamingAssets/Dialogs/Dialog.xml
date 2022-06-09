@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dialogs>
+  <Dialog id="0">
+    <Phrase Text="Привет, как дела?">
+      <Answer Text="Привет, хорошо">
+        <Phrase Text="Рад это слышать. Как тебя зовут?">
+          <Answer Text="Не твое дело">
+
+            <Phrase Text="Ну, не мое, так не мое. Не дам тебе задания"/>
+            
+          </Answer>
+          <Answer Text="Артем">
+
+            <Phrase Text="Прекрасное имя. Дать работу?">
+
+              <Answer Text="Да, спасибо"/>
+              
+            </Phrase>
+            
+          </Answer>
+        </Phrase>
+      </Answer>
+      <Answer Text="Отвали">
+        <Phrase Text="Не груби"/>
+      </Answer>
+    </Phrase>
+  </Dialog>
+</Dialogs>
