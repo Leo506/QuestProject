@@ -17,6 +17,20 @@ public class Quest
     public string Description;
     public int id;
     public int GiverID;
-    public QuestState State;
+
+    private QuestState _state;
+
+    [SerializeField]
+    public QuestState State
+    {
+        get => _state;
+        set
+        {
+            _state = value;
+            OnStateChange?.Invoke(id, _state);
+        }
+    }
     [SerializeReference] public Conditions.Condition Condition;
+
+    public static event System.Action<int, QuestState> OnStateChange;
 }
