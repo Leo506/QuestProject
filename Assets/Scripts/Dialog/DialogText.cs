@@ -9,15 +9,26 @@ namespace DialogSystem
 {
     public class DialogText : MonoBehaviour
     {
+        public static event System.Action DialogEndEvent;
+
         [SerializeField] Text mainText;
         [SerializeField] Button[] answerButtons;
+        [SerializeField] Canvas dialogCanvas;
 
         DialogItem currentItem;
 
         // Start is called before the first frame update
         void Start()
         {
-            currentItem = XmlToDialog.ReadDialog(Application.streamingAssetsPath + "/Dialogs/Dialog.xml", 0)[0];
+            DialogButton.ChooseAnswerEvent += OnAnswerSelected;
+
+            QuestGiver.QuestGivingStart += StartDialog;
+        }
+
+        private void StartDialog(int id)
+        {
+            dialogCanvas.enabled = true;
+            currentItem = XmlToDialog.ReadDialog(Application.streamingAssetsPath + "/Dialogs/Dialog.xml", id)[0];
             mainText.text = currentItem.Phrase;
 
             for (int i = 0; i < answerButtons.Length; i++)
@@ -25,14 +36,16 @@ namespace DialogSystem
                 answerButtons[i].GetComponent<Text>().text = currentItem.Items[i].Phrase;
                 answerButtons[i].GetComponent<DialogButton>().item = currentItem.Items[i];
             }
-
-            DialogButton.ChooseAnswerEvent += OnAnswerSelected;
         }
 
         private void OnAnswerSelected(DialogItem item)
         {
             if (item.Items.Count == 0)
+            {
+                DialogEndEvent?.Invoke();
+                dialogCanvas.enabled = false;
                 return;
+            }
 
             string debug = "item phrase: " + item.Phrase;
             for (int i = 0; i < item.Items.Count; i++)

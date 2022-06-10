@@ -6,7 +6,11 @@
         <Phrase Text="Рад это слышать. Как тебя зовут?">
           <Answer Text="Не твое дело">
 
-            <Phrase Text="Ну, не мое, так не мое. Не дам тебе задания"/>
+            <Phrase Text="Ну, не мое, так не мое. Не дам тебе задания">
+
+              <Answer Text="..."/>
+              
+            </Phrase>
             
           </Answer>
           <Answer Text="Артем">
@@ -21,7 +25,11 @@
         </Phrase>
       </Answer>
       <Answer Text="Отвали">
-        <Phrase Text="Не груби"/>
+        <Phrase Text="Не груби">
+
+          <Answer Text="..."/>
+          
+        </Phrase>
       </Answer>
     </Phrase>
   </Dialog>

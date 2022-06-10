@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine;
 public class QuestGiver : MonoBehaviour, IUsable
 {
     [SerializeField] int npcID;
+
+    public static event System.Action<int> QuestGivingStart;
+
     public void Use()
     {
         if (QuestManager.CurrentQuest.State == QuestState.PASS)
@@ -12,8 +16,7 @@ public class QuestGiver : MonoBehaviour, IUsable
 
         if (QuestManager.CurrentQuest.GiverID == npcID && QuestManager.CurrentQuest.State == QuestState.NONE)
         {
-            Debug.Log("Quest is given");
-            QuestManager.CurrentQuest.State = QuestState.IN_PROGRESS;
+            QuestGivingStart?.Invoke(QuestManager.CurrentQuest.id);
         }
 
         if (QuestManager.CurrentQuest.State == QuestState.IN_PROGRESS)
@@ -24,6 +27,18 @@ public class QuestGiver : MonoBehaviour, IUsable
                 QuestManager.CurrentQuest.State = QuestState.PASS;
             }
         }
+
+        DialogSystem.DialogText.DialogEndEvent += OnDialogEnd;
+    }
+
+    private void OnDialogEnd()
+    {
+        if (QuestManager.CurrentQuest.GiverID != npcID)
+            return;
+
+
+        Debug.Log("Quest is given");
+        QuestManager.CurrentQuest.State = QuestState.IN_PROGRESS;
     }
 
     private bool CheckQuestTarget()
