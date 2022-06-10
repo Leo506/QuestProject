@@ -17,6 +17,11 @@ public class QuestCreatorEditor : Editor
     SerializedProperty giverIdProperty;
     SerializedProperty stateProperty;
 
+    Condition[] conditions;
+    string[] options;
+
+    QuestCreator creator;
+
     private void OnEnable()
     {
         conditionProperty = serializedObject.FindProperty("condition");
@@ -25,11 +30,17 @@ public class QuestCreatorEditor : Editor
         idProperty = serializedObject.FindProperty("id");
         giverIdProperty = serializedObject.FindProperty("GiverID");
         stateProperty = serializedObject.FindProperty("State");
+
+        conditions = ConditionFactory.GetAllConditiions();
+        options = ConditionFactory.GetAllConditionsNames();
+
+        creator = serializedObject.targetObject as QuestCreator;
+
+        creator.condition = conditions[index];
     }
 
     public override void OnInspectorGUI()
     {
-        QuestCreator creator = serializedObject.targetObject as QuestCreator;
 
         EditorGUILayout.PropertyField(titleProperty);
 
@@ -38,12 +49,8 @@ public class QuestCreatorEditor : Editor
         EditorGUILayout.PropertyField(giverIdProperty);
         EditorGUILayout.PropertyField(stateProperty);
 
-        Condition[] conditions = { new MailCondition(), new DestinationCondition() };
-        string[] options = { conditions[0].GetConditionName(), conditions[1].GetConditionName() };
-
         var newIndex = EditorGUILayout.Popup(index, options);
 
-        // TODO изменение отображаемого условия при изменении выбранного типа
 
         if (newIndex != index)
         {

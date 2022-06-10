@@ -8724,12 +8724,10 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: DestinationCondition, ns: Conditions, asm: Assembly-CSharp}
+      type: {class: MailCondition, ns: Conditions, asm: Assembly-CSharp}
       data:
-        triggerPosition:
-          x: 1
-          y: 1
-          z: 1
+        targetID: -1
+        subjectID: -1
 --- !u!4 &1846471020
 Transform:
   m_ObjectHideFlags: 0
