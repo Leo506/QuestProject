@@ -5,12 +5,15 @@ using UnityEngine;
 namespace Conditions
 {
     [System.Serializable]
-    public abstract class Condition
+    public class Condition
     {
-        public static event System.Action<int> OnPass;
-        public abstract double GetProgress();
-        public abstract string GetConditionName();
+        public event System.Action OnPass;
+        public virtual double GetProgress() => 0;
+        public virtual string GetConditionName() => "";
 
+        public virtual void OnStart() { }
+
+        protected void Pass() => OnPass?.Invoke();
 
     }
 }

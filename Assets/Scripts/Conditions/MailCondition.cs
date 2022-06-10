@@ -22,5 +22,10 @@ namespace Conditions
         {
             return 0;
         }
+
+        public override void OnStart()
+        {
+            
+        }
     }
 }

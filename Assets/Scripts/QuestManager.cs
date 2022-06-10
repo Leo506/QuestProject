@@ -24,6 +24,9 @@ public class QuestManager
             currentQuestId++;
             LoadQuest();
         }
+
+        if (state == QuestState.IN_PROGRESS)
+            CurrentQuest.Start();
     }
 
     private static void LoadQuest()

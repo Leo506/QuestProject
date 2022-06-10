@@ -31,4 +31,11 @@ public class Quest
     [SerializeReference] public Conditions.Condition Condition;
 
     public static event System.Action<int, QuestState> OnStateChange;
+
+    public void Start()
+    {
+        Condition.OnStart();
+
+        Condition.OnPass += () => State = QuestState.PASS;
+    }
 }

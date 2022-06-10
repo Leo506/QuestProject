@@ -33,8 +33,10 @@ namespace DialogSystem
 
             for (int i = 0; i < answerButtons.Length; i++)
             {
-                answerButtons[i].GetComponent<Text>().text = currentItem.Items[i].Phrase;
-                answerButtons[i].GetComponent<DialogButton>().item = currentItem.Items[i];
+                string newText = i >= currentItem.Items.Count ? "" : currentItem.Items[i].Phrase;
+
+                answerButtons[i].GetComponent<Text>().text = newText;
+                answerButtons[i].GetComponent<DialogButton>().item = i >= currentItem.Items.Count ? null : currentItem.Items[i];
             }
         }
 

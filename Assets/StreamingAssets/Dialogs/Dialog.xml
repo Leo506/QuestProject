@@ -33,4 +33,14 @@
       </Answer>
     </Phrase>
   </Dialog>
+
+  <Dialog id="1">
+
+    <Phrase Text="Привет еще раз. Короче, иди туда то" HasAction="false">
+      
+      <Answer Text="Понял, уже иду" HasAction="true"/>
+      
+    </Phrase>
+    
+  </Dialog>
 </Dialogs>
