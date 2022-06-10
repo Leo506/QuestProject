@@ -38,21 +38,18 @@ public class QuestCreatorEditor : Editor
         EditorGUILayout.PropertyField(giverIdProperty);
         EditorGUILayout.PropertyField(stateProperty);
 
-        string[] options = { (new MailCondition()).GetConditionName() };
+        Condition[] conditions = { new MailCondition(), new DestinationCondition() };
+        string[] options = { conditions[0].GetConditionName(), conditions[1].GetConditionName() };
 
         var newIndex = EditorGUILayout.Popup(index, options);
 
         // TODO изменение отображаемого условия при изменении выбранного типа
 
-        /*if (newIndex != index)
+        if (newIndex != index)
         {
-
-            //QuestCreator creator = serializedObject.targetObject as QuestCreator;
-            //creator.condition = new MailCondition();
-            conditionProperty.managedReferenceValue = new MailCondition();
             index = newIndex;
-            Debug.Log("Change to new");
-        }*/
+            creator.condition = conditions[index];
+        }
 
 
         EditorGUILayout.PropertyField(conditionProperty);
