@@ -31,6 +31,11 @@ public class AlphaController : MonoBehaviour
                 if (hit.collider.gameObject != target)
                 {
                     MeshRenderer renderer = hit.collider.gameObject.GetComponent<MeshRenderer>();
+                    if (renderer == null)
+                    {
+                        yield return new WaitForSeconds(0.5f);
+                        continue;
+                    }
                     var color = renderer.material.color;
                     color.a = 0.5f;
                     renderer.material.color = color;
