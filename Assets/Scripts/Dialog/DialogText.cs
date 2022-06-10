@@ -9,7 +9,7 @@ namespace DialogSystem
 {
     public class DialogText : MonoBehaviour
     {
-        public static event System.Action DialogEndEvent;
+        public static event Action<bool> DialogEndEvent;
 
         [SerializeField] Text mainText;
         [SerializeField] Button[] answerButtons;
@@ -44,8 +44,7 @@ namespace DialogSystem
         {
             if (item.Items.Count == 0)
             {
-                if (item.HasAction)
-                    DialogEndEvent?.Invoke();
+                DialogEndEvent?.Invoke(item.HasAction);
                 
                 dialogCanvas.enabled = false;
                 return;

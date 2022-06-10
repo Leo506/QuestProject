@@ -37,7 +37,7 @@ namespace Player
                 DialogSystem.DialogText.DialogEndEvent -= StartMove;
             }
 
-            private void StartMove()
+            private void StartMove(bool param)
             {
                 currentSpeed = speed;
             }

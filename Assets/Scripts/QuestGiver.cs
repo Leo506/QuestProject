@@ -7,7 +7,8 @@ public class QuestGiver : MonoBehaviour, IUsable
 {
     [SerializeField] int npcID;
 
-    public static event System.Action<int> QuestGivingStart;
+    public static event Action<int> QuestGivingStart;
+    public static event Action QuestIsGivenEvent;
 
     public void Use()
     {
@@ -31,13 +32,13 @@ public class QuestGiver : MonoBehaviour, IUsable
         DialogSystem.DialogText.DialogEndEvent += OnDialogEnd;
     }
 
-    private void OnDialogEnd()
+    private void OnDialogEnd(bool action)
     {
-        if (QuestManager.CurrentQuest.GiverID != npcID)
+        if (QuestManager.CurrentQuest.GiverID != npcID || !action)
             return;
 
 
-        Debug.Log("Quest is given");
+        QuestIsGivenEvent?.Invoke();
         QuestManager.CurrentQuest.State = QuestState.IN_PROGRESS;
     }
 
