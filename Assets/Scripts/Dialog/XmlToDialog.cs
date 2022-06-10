@@ -31,12 +31,14 @@ namespace DialogSystem
             {
                 DialogItem dialog = new DialogItem();
                 dialog.SetPhrase(item.Attribute("Text").Value);
-                //Console.WriteLine(item.Attribute("Text").Value);
+                dialog.HasAction = bool.Parse(item.Attribute("HasAction").Value);
 
                 foreach (var answer in item.Elements("Answer"))
                 {
                     string text = answer.Attribute("Text").Value;
+                    bool hasAction = bool.Parse(answer.Attribute("HasAction").Value);
                     DialogItem dialogItem = new DialogItem(text, CreateItem(answer));
+                    dialogItem.HasAction = hasAction;
                     dialog.AddItem(dialogItem);
                 }
 

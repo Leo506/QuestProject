@@ -12,6 +12,8 @@ namespace DialogSystem
 
         public List<DialogItem> Items;
 
+        public bool HasAction = false;
+
         public DialogItem()
         {
             Phrase = "";

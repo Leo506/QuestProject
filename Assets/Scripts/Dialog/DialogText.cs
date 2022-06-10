@@ -42,7 +42,9 @@ namespace DialogSystem
         {
             if (item.Items.Count == 0)
             {
-                DialogEndEvent?.Invoke();
+                if (item.HasAction)
+                    DialogEndEvent?.Invoke();
+                
                 dialogCanvas.enabled = false;
                 return;
             }

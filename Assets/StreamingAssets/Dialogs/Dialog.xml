@@ -1,33 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Dialogs>
   <Dialog id="0">
-    <Phrase Text="Привет, как дела?">
-      <Answer Text="Привет, хорошо">
-        <Phrase Text="Рад это слышать. Как тебя зовут?">
-          <Answer Text="Не твое дело">
+    <Phrase Text="Привет, как дела?" HasAction="false">
+      <Answer Text="Привет, хорошо" HasAction="false">
+        <Phrase Text="Рад это слышать. Как тебя зовут?" HasAction="false">
+          <Answer Text="Не твое дело" HasAction="false">
 
-            <Phrase Text="Ну, не мое, так не мое. Не дам тебе задания">
+            <Phrase Text="Ну, не мое, так не мое. Не дам тебе задания" HasAction="false">
 
-              <Answer Text="..."/>
+              <Answer Text="..." HasAction="false"/>
               
             </Phrase>
             
           </Answer>
-          <Answer Text="Артем">
+          <Answer Text="Артем" HasAction="false">
 
-            <Phrase Text="Прекрасное имя. Дать работу?">
+            <Phrase Text="Прекрасное имя. Дать работу?" HasAction="false">
 
-              <Answer Text="Да, спасибо"/>
+              <Answer Text="Да, спасибо" HasAction="true"/>
               
             </Phrase>
             
           </Answer>
         </Phrase>
       </Answer>
-      <Answer Text="Отвали">
-        <Phrase Text="Не груби">
+      <Answer Text="Отвали" HasAction="false">
+        <Phrase Text="Не груби" HasAction="false">
 
-          <Answer Text="..."/>
+          <Answer Text="..." HasAction="false"/>
           
         </Phrase>
       </Answer>
