@@ -19,6 +19,14 @@ public class TriggerBuilder : MonoBehaviour
     GameObject currentPointer;
     Transform currentTrigger;
 
+    Dictionary<int, float> rotation = new Dictionary<int, float>
+    {
+        {0, -90 },
+        {1, 90 },
+        {2, 180 },
+        {3, 0 }
+    };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,23 +65,30 @@ public class TriggerBuilder : MonoBehaviour
         Vector3 playerToTrigger = currentTrigger.position - player.position;
         Ray ray = new Ray(player.position, playerToTrigger);
 
-
+        // [0] = Left, [1] = Right, [2] = Down, [3] = Up, [4] = Near, [5] = Far
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
 
         float minDistance = Mathf.Infinity;
+        int index = 0;
 
-        foreach (var item in planes)
+        for (int i = 0; i < planes.Length; i++)
         {
-            if (item.Raycast(ray, out float distance))
+            if (planes[i].Raycast(ray, out float distance))
             {
                 if (distance < minDistance)
+                {
                     minDistance = distance;
+                    index = i;
+                }
             }
         }
+
+        minDistance = Mathf.Clamp(minDistance, 0, playerToTrigger.magnitude);
 
         Vector3 worldPos = ray.GetPoint(minDistance);
         Vector3 screenPos = mainCamera.WorldToScreenPoint(worldPos);
 
         currentPointer.transform.position = screenPos;
+        currentPointer.transform.rotation = Quaternion.Euler(0, 0, rotation[index]);
     }
 }
