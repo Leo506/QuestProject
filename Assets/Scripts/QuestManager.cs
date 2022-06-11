@@ -7,7 +7,7 @@ using System;
 
 public class QuestManager
 {
-    private static int currentQuestId = 0;
+    private static int currentQuestId = 1;
     public static Quest CurrentQuest { get; private set; }
 
     static QuestManager()

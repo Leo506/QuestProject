@@ -10,6 +10,11 @@ public class QuestGiver : MonoBehaviour, IUsable
     public static event Action<int> QuestGivingStart;
     public static event Action QuestIsGivenEvent;
 
+    private void Start()
+    {
+        DialogSystem.DialogText.DialogEndEvent += OnDialogEnd;
+    }
+
     public void Use()
     {
         if (QuestManager.CurrentQuest.State == QuestState.PASS)
@@ -29,7 +34,7 @@ public class QuestGiver : MonoBehaviour, IUsable
             }
         }
 
-        DialogSystem.DialogText.DialogEndEvent += OnDialogEnd;
+        
     }
 
     private void OnDialogEnd(bool action)

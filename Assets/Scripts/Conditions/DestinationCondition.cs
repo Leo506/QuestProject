@@ -33,21 +33,18 @@ namespace Conditions
 
         public override void OnStart()
         {
-            Quest.OnStateChange += StartQuest;
+            StartQuest();
             Trigger.OnTriggerEnterEvent += EndQuest;
         }
 
 
         ~DestinationCondition()
         {
-            Quest.OnStateChange -= StartQuest;
+            
         }
 
-        private void StartQuest(int id, QuestState state)
+        private void StartQuest()
         {
-            if (state != QuestState.IN_PROGRESS)
-                return;
-
             CreateTriggerEvent?.Invoke(triggerPosition);
         }
 
