@@ -11,7 +11,7 @@ namespace NPCManagement
         public int npcID;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             NPCManager.RegistrateNPC(this);
         }

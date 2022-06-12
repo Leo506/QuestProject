@@ -12,7 +12,8 @@ namespace QuestLanguage
 
         public override void Start()
         {
-            // TODO find npces with id fromID and toID and attach Sender and Target components
+            NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<Components.SenderComponent>();
+            NPCManagement.NPCManager.GetNPC(toID).gameObject.AddComponent<Components.TargetComponent>();
         }
 
         public DeliveryQuest(string parametrs)
