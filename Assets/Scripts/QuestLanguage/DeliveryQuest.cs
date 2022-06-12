@@ -20,28 +20,27 @@ namespace QuestLanguage
             Debug.Log(parametrs);
             parametrs = parametrs.Remove(0, 4);
 
-            string idString = "";
-            int i = 0;
-            while (int.TryParse(parametrs[i].ToString(), out int n) && i < parametrs.Length)
-            {
-                idString += parametrs[i];
-                i++;
-            }
+            fromID = GetFirstNumber(parametrs);
+
+            parametrs = parametrs.Remove(0, fromID.ToString().Length + 2);
 
 
-            fromID = int.Parse(idString);
-
-            parametrs = parametrs.Remove(0, idString.Length + 2);
-            i = 0;
-            idString = "";
-            while (int.TryParse(parametrs[i].ToString(), out int n) && i < parametrs.Length)
-            {
-                idString += parametrs[i];
-                i++;
-            }
-
-            toID = int.Parse(idString);
+            toID = GetFirstNumber(parametrs);
             Debug.Log("Delivery quest is created from " + fromID + " to " + toID);
+        }
+
+
+        private int GetFirstNumber(string str)
+        {
+            string number = "";
+            int i = 0;
+            while (int.TryParse(str[i].ToString(), out int n) && i < str.Length)
+            {
+                number += str[i];
+                i++;
+            }
+
+            return int.Parse(number);
         }
     }
 }
