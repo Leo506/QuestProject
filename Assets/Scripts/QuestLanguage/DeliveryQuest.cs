@@ -13,7 +13,8 @@ namespace QuestLanguage
         public override void Start()
         {
             NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<Components.SenderComponent>();
-            NPCManagement.NPCManager.GetNPC(toID).gameObject.AddComponent<Components.TargetComponent>();
+            var target = NPCManagement.NPCManager.GetNPC(toID).gameObject.AddComponent<Components.TargetComponent>();
+            target.TargetGotMailEvent += Pass;
         }
 
         public DeliveryQuest(string parametrs)

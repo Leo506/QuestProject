@@ -5,8 +5,11 @@ using UnityEngine;
 
 namespace QuestLanguage
 {
-    public abstract class Quest
+    public class Quest
     {
-        public abstract void Start();
+        public static event System.Action QuestPassedEvent;
+
+        public void Pass() => QuestPassedEvent?.Invoke();
+        public virtual void Start() { }
     }
 }

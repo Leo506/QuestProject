@@ -11,6 +11,8 @@ namespace DialogSystem
     {
         public static event Action<bool> DialogEndEvent;
 
+        public static DialogText Instance;
+
         [SerializeField] Text mainText;
         [SerializeField] Button[] answerButtons;
         [SerializeField] Canvas dialogCanvas;
@@ -20,12 +22,17 @@ namespace DialogSystem
         // Start is called before the first frame update
         void Start()
         {
+            if (Instance != this && Instance != null)
+                Destroy(Instance.gameObject);
+
+            Instance = this;
+
             DialogButton.ChooseAnswerEvent += OnAnswerSelected;
 
             QuestGiver.QuestGivingStart += StartDialog;
         }
 
-        private void StartDialog(int id)
+        public void StartDialog(int id)
         {
             dialogCanvas.enabled = true;
             currentItem = XmlToDialog.ReadDialog(Application.streamingAssetsPath + "/Dialogs/Dialog.xml", id)[0];

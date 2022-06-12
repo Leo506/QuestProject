@@ -7,6 +7,9 @@ namespace Components
 {
     public class SenderComponent : MonoBehaviour
     {
+        public void OnUse()
+        {
 
+        }
     }
 }
