@@ -1,2 +1,2 @@
-delivery from 0 to 1
+delivery from 100 to 1
 spawn plottrigger 0 0 0 0

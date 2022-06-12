@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace QuestLanguage
 {
@@ -30,7 +31,7 @@ namespace QuestLanguage
             return toReturn;
         }
 
-        public void CreateQuest()
+        public object CreateQuest()
         {
             string type = lines[0].Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries)[0];
             TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
@@ -38,7 +39,15 @@ namespace QuestLanguage
             Debug.Log("Type: " + type);
             System.Type t = System.Type.GetType(type);
 
-            Activator.CreateInstance(t);
+            var parList = lines[0].Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+            parList.RemoveAt(0);
+
+            string newLine = "";
+            foreach (var item in parList)
+                newLine += item;
+
+
+            return Activator.CreateInstance(t, new object[] { newLine });
         }
     }
 }
