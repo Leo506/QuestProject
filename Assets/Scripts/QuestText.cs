@@ -13,6 +13,7 @@ public class QuestText : MonoBehaviour
     void Start()
     {
         QuestSystem.QuestManager.QuestIsGotEvent += OnQuestGiven;
+        QuestLanguage.Quest.QuestPassedEvent += ClearAllTexts;
     }
 
     private void OnQuestGiven(QuestLanguage.Quest quest)
@@ -30,5 +31,6 @@ public class QuestText : MonoBehaviour
     private void OnDestroy()
     {
         QuestSystem.QuestManager.QuestIsGotEvent -= OnQuestGiven;
+        QuestLanguage.Quest.QuestPassedEvent -= ClearAllTexts;
     }
 }

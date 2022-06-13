@@ -43,4 +43,10 @@
     </Phrase>
     
   </Dialog>
+
+  <Dialog id="-1">
+    <Phrase Text="Спасибо, что занес это мне" HasAction="false">
+      <Answer Text="Всегда пожалуйста" HasAction="false"/>
+    </Phrase>
+  </Dialog>
 </Dialogs>

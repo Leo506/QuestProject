@@ -10,6 +10,7 @@ namespace Components
         public void Use()
         {
             DialogSystem.DialogText.Instance.StartDialog(QuestSystem.QuestManager.currentQuestID);
+            Destroy(this);
         }
     }
 }
