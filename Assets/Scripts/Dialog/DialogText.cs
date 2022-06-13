@@ -9,6 +9,7 @@ namespace DialogSystem
 {
     public class DialogText : MonoBehaviour
     {
+        public static event Action DialogStartEvent;
         public static event Action<bool> DialogEndEvent;
 
         public static DialogText Instance;
@@ -34,6 +35,8 @@ namespace DialogSystem
 
         public void StartDialog(int id)
         {
+            DialogStartEvent?.Invoke();
+
             dialogCanvas.enabled = true;
             currentItem = XmlToDialog.ReadDialog(Application.streamingAssetsPath + "/Dialogs/Dialog.xml", id)[0];
             mainText.text = currentItem.Phrase;

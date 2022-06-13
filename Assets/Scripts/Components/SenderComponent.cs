@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Components
 {
-    public class SenderComponent : MonoBehaviour
+    public class SenderComponent : MonoBehaviour, IUsable
     {
-        public void OnUse()
+        public void Use()
         {
-
+            DialogSystem.DialogText.Instance.StartDialog(QuestSystem.QuestManager.currentQuestID);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace QuestSystem
         {
             currentQuestID = 0;
             QuestLanguage.Quest.QuestPassedEvent += OnQuestPass;
+            LoadQuest();
+            Debug.Log("Quest is loaded");
         }
 
         private static void OnQuestPass()
