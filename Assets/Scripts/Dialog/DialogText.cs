@@ -29,8 +29,6 @@ namespace DialogSystem
             Instance = this;
 
             DialogButton.ChooseAnswerEvent += OnAnswerSelected;
-
-            QuestGiver.QuestGivingStart += StartDialog;
         }
 
         public void StartDialog(int id)
@@ -85,12 +83,6 @@ namespace DialogSystem
                 answerButtons[i].GetComponent<Text>().text = newText;
                 answerButtons[i].GetComponent<DialogButton>().item = i >= currentItem.Items.Count ? null : currentItem.Items[i];
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

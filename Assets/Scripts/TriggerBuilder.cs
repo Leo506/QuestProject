@@ -30,7 +30,6 @@ public class TriggerBuilder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Conditions.DestinationCondition.CreateTriggerEvent += OnTriggerCreate;
         Trigger.OnTriggerEnterEvent += DestroyPointer;
         mainCamera = Camera.main;
     }
@@ -42,10 +41,10 @@ public class TriggerBuilder : MonoBehaviour
 
     private void OnDestroy()
     {
-        Conditions.DestinationCondition.CreateTriggerEvent -= OnTriggerCreate;
+
     }
 
-    private void OnTriggerCreate(Conditions.Vector3 pos)
+    private void OnTriggerCreate(Vector3 pos)
     {
         Vector3 worldPos = new Vector3(pos.x, pos.y, pos.z);
         currentTrigger = Instantiate(triggerPrefab, triggersRoot).transform;
