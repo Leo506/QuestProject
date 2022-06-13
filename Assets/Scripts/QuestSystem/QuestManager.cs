@@ -17,7 +17,7 @@ namespace QuestSystem
 
         static QuestManager()
         {
-            currentQuestID = 0;
+            currentQuestID = 1;
             QuestLanguage.Quest.QuestPassedEvent += OnQuestPass;
             DialogSystem.DialogText.DialogEndEvent += QuestGot;
             LoadQuest();

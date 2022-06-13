@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Dialogs>
-  <Dialog id="0">
+  <Dialog id="1">
     <Phrase Text="Привет, как дела?" HasAction="false">
       <Answer Text="Привет, хорошо" HasAction="false">
         <Phrase Text="Рад это слышать. Как тебя зовут?" HasAction="false">
@@ -34,7 +34,7 @@
     </Phrase>
   </Dialog>
 
-  <Dialog id="1">
+  <Dialog id="2">
 
     <Phrase Text="Привет еще раз. Короче, иди туда то" HasAction="false">
       

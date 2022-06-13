@@ -11,9 +11,9 @@ namespace Components
 
         public void Use()
         {
-            TargetGotMailEvent?.Invoke();
-
             DialogSystem.DialogText.Instance.StartDialog(-QuestSystem.QuestManager.currentQuestID);
+
+            TargetGotMailEvent?.Invoke();
 
             Destroy(this);
         }

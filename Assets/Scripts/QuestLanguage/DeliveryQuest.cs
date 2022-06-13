@@ -18,7 +18,7 @@ namespace QuestLanguage
             target.TargetGotMailEvent += Pass;
         }
 
-        public DeliveryQuest(string parametrs)
+        public DeliveryQuest(string parametrs) : base(parametrs)
         {
             Debug.Log(parametrs);
 
@@ -29,17 +29,6 @@ namespace QuestLanguage
 
             tmp = parList.FindIndex(s => s == "to");
             toID = int.Parse(parList[tmp + 1]);
-
-            var nameIndex = parList.FindIndex(s => s == "name");
-            var descIndex = parList.FindIndex(s => s == "description");
-
-            QuestName = "";
-            for (int i = nameIndex + 1; i < descIndex; i++)
-                QuestName += parList[i] + " ";
-
-            QuestDescription = "";
-            for (int i = descIndex + 1; i < parList.Count; i++)
-                QuestDescription += parList[i] + " ";
 
 
             Debug.Log("Delivery quest name: " + QuestName + " Description: " + QuestDescription);
