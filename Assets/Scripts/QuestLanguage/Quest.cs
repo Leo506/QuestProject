@@ -9,6 +9,9 @@ namespace QuestLanguage
     {
         public static event System.Action QuestPassedEvent;
 
+        public string QuestName { get; protected set; }
+        public string QuestDescription { get; protected set; }
+
         public void Pass() => QuestPassedEvent?.Invoke();
         public virtual void Start() { }
     }

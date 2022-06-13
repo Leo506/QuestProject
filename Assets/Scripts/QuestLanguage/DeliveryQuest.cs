@@ -20,15 +20,25 @@ namespace QuestLanguage
         public DeliveryQuest(string parametrs)
         {
             Debug.Log(parametrs);
-            parametrs = parametrs.Remove(0, 4);
+            parametrs = parametrs.Remove(0, 4);  // Remove "from"
 
             fromID = GetFirstNumber(parametrs);
 
-            parametrs = parametrs.Remove(0, fromID.ToString().Length + 2);
-
+            parametrs = parametrs.Remove(0, fromID.ToString().Length + 2);  // Remove number + "to"
 
             toID = GetFirstNumber(parametrs);
-            Debug.Log("Delivery quest is created from " + fromID + " to " + toID);
+
+            parametrs = parametrs.Remove(0, toID.ToString().Length + 4);  // Remove "name" + toID
+
+            int descIndex = parametrs.IndexOfAny("description".ToCharArray());
+            QuestName = "";
+            for (int i = 0; i < descIndex; i++)
+                QuestName += parametrs[i];
+
+            parametrs = parametrs.Remove(0, "description".Length);
+            QuestDescription = parametrs;
+
+            Debug.Log("Delivery quest name: " + QuestName + " Description: " + QuestDescription);
         }
 
 
