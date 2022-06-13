@@ -3,19 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using QuestLanguage;
+using System;
 
 namespace QuestSystem
 {
     public class QuestManager
     {
+
+        public static event Action<QuestLanguage.Quest> QuestIsGotEvent;
         public static int currentQuestID { get; private set; }
+
+        private static QuestLanguage.Quest currentQuest;
 
         static QuestManager()
         {
             currentQuestID = 0;
             QuestLanguage.Quest.QuestPassedEvent += OnQuestPass;
+            DialogSystem.DialogText.DialogEndEvent += QuestGot;
             LoadQuest();
             Debug.Log("Quest is loaded");
+        }
+
+        private static void QuestGot(bool action)
+        {
+            if (!action)
+                return;
+
+            QuestIsGotEvent?.Invoke(currentQuest);
         }
 
         private static void OnQuestPass()
@@ -37,6 +51,8 @@ namespace QuestSystem
 
             QuestLanguage.Quest quest = parser.CreateQuest() as QuestLanguage.Quest;
             quest.Start();
+
+            currentQuest = quest;
         }
     }
 }

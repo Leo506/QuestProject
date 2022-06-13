@@ -34,20 +34,14 @@ namespace QuestLanguage
         public object CreateQuest()
         {
             string type = lines[0].Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries)[0];
+            lines[0] = lines[0].Remove(0, type.Length + 1);
             TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
             type = "QuestLanguage." + myTI.ToTitleCase(type) + "Quest";
             Debug.Log("Type: " + type);
             System.Type t = System.Type.GetType(type);
 
-            var parList = lines[0].Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
-            parList.RemoveAt(0);
 
-            string newLine = "";
-            foreach (var item in parList)
-                newLine += item;
-
-
-            return Activator.CreateInstance(t, new object[] { newLine });
+            return Activator.CreateInstance(t, new object[] { lines[0] });
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -20,23 +21,26 @@ namespace QuestLanguage
         public DeliveryQuest(string parametrs)
         {
             Debug.Log(parametrs);
-            parametrs = parametrs.Remove(0, 4);  // Remove "from"
 
-            fromID = GetFirstNumber(parametrs);
+            List<string> parList = parametrs.Split(new char[] {' '}, System.StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            parametrs = parametrs.Remove(0, fromID.ToString().Length + 2);  // Remove number + "to"
+            var tmp = parList.FindIndex(s => s == "from");
+            fromID = int.Parse(parList[tmp + 1]);
 
-            toID = GetFirstNumber(parametrs);
+            tmp = parList.FindIndex(s => s == "to");
+            toID = int.Parse(parList[tmp + 1]);
 
-            parametrs = parametrs.Remove(0, toID.ToString().Length + 4);  // Remove "name" + toID
+            var nameIndex = parList.FindIndex(s => s == "name");
+            var descIndex = parList.FindIndex(s => s == "description");
 
-            int descIndex = parametrs.IndexOfAny("description".ToCharArray());
             QuestName = "";
-            for (int i = 0; i < descIndex; i++)
-                QuestName += parametrs[i];
+            for (int i = nameIndex + 1; i < descIndex; i++)
+                QuestName += parList[i] + " ";
 
-            parametrs = parametrs.Remove(0, "description".Length);
-            QuestDescription = parametrs;
+            QuestDescription = "";
+            for (int i = descIndex + 1; i < parList.Count; i++)
+                QuestDescription += parList[i] + " ";
+
 
             Debug.Log("Delivery quest name: " + QuestName + " Description: " + QuestDescription);
         }

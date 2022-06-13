@@ -12,24 +12,13 @@ public class QuestText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Quest.OnStateChange += OnQuestGiven;
+        QuestSystem.QuestManager.QuestIsGotEvent += OnQuestGiven;
     }
 
-    private void OnQuestGiven(int questID, QuestState state)
+    private void OnQuestGiven(QuestLanguage.Quest quest)
     {
-        if (state == QuestState.IN_PROGRESS)
-        {
-            titleText.text = QuestManager.CurrentQuest.Title;
-            descriptionText.text = QuestManager.CurrentQuest.Description;
-        }
-        else if (state == QuestState.PASS)
-        {
-            titleText.text = "";
-            descriptionText.text = " вест сдан!!!";
-            Invoke("ClearAllTexts", 2);
-        }
-        else
-            ClearAllTexts();
+        titleText.text = quest.QuestName;
+        descriptionText.text = quest.QuestDescription;
     }
 
     private void ClearAllTexts()
@@ -40,6 +29,6 @@ public class QuestText : MonoBehaviour
 
     private void OnDestroy()
     {
-        Quest.OnStateChange -= OnQuestGiven;
+        QuestSystem.QuestManager.QuestIsGotEvent -= OnQuestGiven;
     }
 }
