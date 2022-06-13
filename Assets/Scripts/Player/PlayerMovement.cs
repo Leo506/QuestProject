@@ -26,14 +26,14 @@ namespace Player
             {
                 input = InputFactory.Instance.GetInputController();
                 characterController = GetComponent<CharacterController>();
-                QuestGiver.QuestGivingStart += StopMove;
+                DialogSystem.DialogText.DialogStartEvent += StopMove;
                 DialogSystem.DialogText.DialogEndEvent += StartMove;
                 currentSpeed = speed;
             }
 
             private void OnDestroy()
             {
-                QuestGiver.QuestGivingStart -= StopMove;
+                DialogSystem.DialogText.DialogStartEvent -= StopMove;
                 DialogSystem.DialogText.DialogEndEvent -= StartMove;
             }
 
@@ -42,7 +42,7 @@ namespace Player
                 currentSpeed = speed;
             }
 
-            private void StopMove(int obj)
+            private void StopMove()
             {
                 currentSpeed = 0;
             }
