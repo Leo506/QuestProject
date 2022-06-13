@@ -13,9 +13,7 @@ namespace QuestLanguage
 
         public override void Start()
         {
-            NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<Components.SenderComponent>();
-            var target = NPCManagement.NPCManager.GetNPC(toID).gameObject.AddComponent<Components.TargetComponent>();
-            target.TargetGotMailEvent += Pass;
+            
         }
 
         public DeliveryQuest(string parametrs) : base(parametrs)
@@ -31,21 +29,11 @@ namespace QuestLanguage
             toID = int.Parse(parList[tmp + 1]);
 
 
+            NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<Components.SenderComponent>();
+            var target = NPCManagement.NPCManager.GetNPC(toID).gameObject.AddComponent<Components.TargetComponent>();
+            target.TargetGotMailEvent += Pass;
+
             Debug.Log("Delivery quest name: " + QuestName + " Description: " + QuestDescription);
-        }
-
-
-        private int GetFirstNumber(string str)
-        {
-            string number = "";
-            int i = 0;
-            while (int.TryParse(str[i].ToString(), out int n) && i < str.Length)
-            {
-                number += str[i];
-                i++;
-            }
-
-            return int.Parse(number);
         }
     }
 }

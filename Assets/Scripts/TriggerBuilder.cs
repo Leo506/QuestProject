@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class TriggerBuilder : MonoBehaviour
 {
-    // TODO создать префаб триггера
+    public static TriggerBuilder Instance;
+
     [SerializeField] Trigger triggerPrefab;
     [SerializeField] Transform triggersRoot;
 
@@ -30,6 +31,11 @@ public class TriggerBuilder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (Instance != this && Instance != null)
+            Destroy(Instance.gameObject);
+
+        Instance = this;
+
         Trigger.OnTriggerEnterEvent += DestroyPointer;
         mainCamera = Camera.main;
     }
@@ -39,12 +45,7 @@ public class TriggerBuilder : MonoBehaviour
         Destroy(currentPointer.gameObject);
     }
 
-    private void OnDestroy()
-    {
-
-    }
-
-    private void OnTriggerCreate(Vector3 pos)
+    public void CreateTrigger(Vector3 pos)
     {
         Vector3 worldPos = new Vector3(pos.x, pos.y, pos.z);
         currentTrigger = Instantiate(triggerPrefab, triggersRoot).transform;

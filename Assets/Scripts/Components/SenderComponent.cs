@@ -23,5 +23,10 @@ namespace Components
         {
             DialogSystem.DialogText.Instance.StartDialog(QuestSystem.QuestManager.currentQuestID);
         }
+
+        private void OnDestroy()
+        {
+            DialogSystem.DialogText.DialogEndEvent += OnDialogEnd;
+        }
     }
 }

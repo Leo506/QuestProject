@@ -13,7 +13,8 @@ namespace QuestLanguage
 
         public override void Start()
         {
-            base.Start();
+            
+            TriggerBuilder.Instance.CreateTrigger(triggerPos);
         }
 
         public GettoQuest(string parametrs) : base(parametrs)
@@ -29,7 +30,16 @@ namespace QuestLanguage
             var fromIndex = parList.FindIndex(s => s == "from");
             fromID = int.Parse(parList[fromIndex + 1].ToString());
 
+            Trigger.OnTriggerEnterEvent += Pass;
+
+            NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<Components.SenderComponent>();
+
             Debug.Log("Getto quest is created. Trigger position: " + triggerPos);
+        }
+
+        ~GettoQuest()
+        {
+            Trigger.OnTriggerEnterEvent -= Pass;
         }
     }
 }

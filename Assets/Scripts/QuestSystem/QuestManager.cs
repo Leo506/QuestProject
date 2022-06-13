@@ -29,6 +29,7 @@ namespace QuestSystem
             if (!action)
                 return;
 
+            currentQuest.Start();
             QuestIsGotEvent?.Invoke(currentQuest);
         }
 
@@ -50,7 +51,6 @@ namespace QuestSystem
             parser.Parse(text);
 
             QuestLanguage.Quest quest = parser.CreateQuest() as QuestLanguage.Quest;
-            quest.Start();
 
             currentQuest = quest;
         }
