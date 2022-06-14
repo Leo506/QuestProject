@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Dialogs>
+  <Dialog id="0">
+    <Phrase Text="Оп-па, кто к нам колеса катит?" HasAction="false">
+      <Answer Text="не твое дело" HasAction="false"/>
+    </Phrase>
+  </Dialog>
+</Dialogs>

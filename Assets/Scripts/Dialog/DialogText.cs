@@ -31,12 +31,12 @@ namespace DialogSystem
             DialogButton.ChooseAnswerEvent += OnAnswerSelected;
         }
 
-        public void StartDialog(int id)
+        public void StartDialog(int id, string path = "/Dialogs/Dialog.xml")
         {
             DialogStartEvent?.Invoke();
 
             dialogCanvas.enabled = true;
-            currentItem = XmlToDialog.ReadDialog(Application.streamingAssetsPath + "/Dialogs/Dialog.xml", id)[0];
+            currentItem = XmlToDialog.ReadDialog(Application.streamingAssetsPath + path, id)[0];
             mainText.text = currentItem.Phrase;
 
             for (int i = 0; i < answerButtons.Length; i++)

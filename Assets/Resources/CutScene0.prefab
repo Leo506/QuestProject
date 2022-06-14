@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29bb4a95ab3c4bc4497e0dc8e77c7845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasDialog: 1
 --- !u!135 &4295461299449606911
 SphereCollider:
   m_ObjectHideFlags: 0
