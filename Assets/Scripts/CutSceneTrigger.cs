@@ -12,6 +12,7 @@ public class CutSceneTrigger : MonoBehaviour
 
     private PlayableDirector director;
 
+    public static event System.Action CutSceneStartEvent;
 
     private void OnEnable()
     {
@@ -34,7 +35,7 @@ public class CutSceneTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Play");
+            CutSceneStartEvent?.Invoke();
             director.Play();
         }
     }

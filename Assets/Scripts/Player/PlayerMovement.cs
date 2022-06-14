@@ -28,6 +28,7 @@ namespace Player
                 characterController = GetComponent<CharacterController>();
                 DialogSystem.DialogText.DialogStartEvent += StopMove;
                 DialogSystem.DialogText.DialogEndEvent += StartMove;
+                CutSceneTrigger.CutSceneStartEvent += StopMove;
                 currentSpeed = speed;
             }
 
@@ -35,6 +36,7 @@ namespace Player
             {
                 DialogSystem.DialogText.DialogStartEvent -= StopMove;
                 DialogSystem.DialogText.DialogEndEvent -= StartMove;
+                CutSceneTrigger.CutSceneStartEvent -= StopMove;
             }
 
             private void StartMove(bool param)
