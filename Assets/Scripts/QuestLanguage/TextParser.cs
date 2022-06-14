@@ -40,8 +40,24 @@ namespace QuestLanguage
             Debug.Log("Type: " + type);
             System.Type t = System.Type.GetType(type);
 
+            ExecuteAdditional();
 
             return Activator.CreateInstance(t, new object[] { lines[0] });
+        }
+
+        private void ExecuteAdditional()
+        {
+            for (int i = 1; i < lines.Length; i++)
+            {
+                string type = lines[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                var newLine = lines[i].Remove(0, type.Length + 1);
+
+                TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+                type = "QuestLanguage." + myTI.ToTitleCase(type);
+
+                var t = Type.GetType(type);
+                Activator.CreateInstance(t, new object[] { newLine });
+            }
         }
     }
 }
