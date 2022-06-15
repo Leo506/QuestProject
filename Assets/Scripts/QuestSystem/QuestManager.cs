@@ -25,6 +25,8 @@ namespace QuestSystem
         private static void OnQuestPass(Quest quest)
         {
             currentQuestID++;
+            Debug.Log("Current quest id: " + currentQuestID);
+            currentQuest.Destroy();
             LoadQuest();
         }
 

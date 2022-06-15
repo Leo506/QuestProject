@@ -17,6 +17,7 @@ namespace QuestLanguage
         public void Pass() => QuestPassedEvent?.Invoke(this);
         public void Got() => QuestGotEvent?.Invoke(this);
         public virtual void Start() { }
+        public virtual void Destroy() { }
 
         public Quest(string parametrs)
         {

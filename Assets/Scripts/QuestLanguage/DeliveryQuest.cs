@@ -26,9 +26,21 @@ namespace QuestLanguage
 
             NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<Components.SenderComponent>();
             var target = NPCManagement.NPCManager.GetNPC(toID).gameObject.AddComponent<Components.TargetComponent>();
-            target.TargetGotMailEvent += Pass;
+            
+            target.TargetGotMailEvent += Pass;                        // Условие сдачи квеста - получение посылки адресатом
 
-            DialogSystem.DialogText.DialogEndEvent += param => { if (param) Got(); };
+            DialogSystem.DialogText.DialogActionEvent += GotQuest;    // Условие получения квеста
+        }
+
+        private void GotQuest(int id)
+        {
+            if (id == QuestSystem.QuestManager.currentQuestID)
+                Got();
+        }
+
+        ~DeliveryQuest()
+        {
+            DialogSystem.DialogText.DialogActionEvent -= GotQuest;
         }
     }
 }

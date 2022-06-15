@@ -34,7 +34,23 @@
     </Phrase>
   </Dialog>
 
+  <Dialog id="-1">
+    <Phrase Text="Спасибо, что занес это мне" HasAction="false">
+      <Answer Text="Всегда пожалуйста" HasAction="true">
+        <Phrase Text="Иди теперь поговири с мамой" HasAction="false">
+          <Answer Text="Окей" HasAction="true"/>
+        </Phrase>
+      </Answer>
+    </Phrase>
+  </Dialog>
+
   <Dialog id="2">
+    <Phrase Text="Привет" HasAction="false">
+      <Answer Text="Пока" HasAction="true"/>
+    </Phrase>
+  </Dialog>
+
+  <Dialog id="3">
 
     <Phrase Text="Привет еще раз. Короче, иди туда то" HasAction="false">
       
@@ -44,15 +60,5 @@
     
   </Dialog>
 
-  <Dialog id="-1">
-    <Phrase Text="Спасибо, что занес это мне" HasAction="false">
-      <Answer Text="Всегда пожалуйста" HasAction="false"/>
-    </Phrase>
-  </Dialog>
-
-  <Dialog id="3">
-    <Phrase Text="Привет" HasAction="false">
-      <Answer Text="Пока" HasAction="false"/>
-    </Phrase>
-  </Dialog>
+  
 </Dialogs>

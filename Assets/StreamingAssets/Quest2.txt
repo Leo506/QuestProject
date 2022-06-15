@@ -1,1 +1,1 @@
-getto pos 1 1 1 from 0 name Добраться до description Доберись до цели
+chat id 0 autoStart false name Поговорить с мамой description Поговорить

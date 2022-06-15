@@ -9,45 +9,44 @@ namespace QuestLanguage
 {
     public class ChatQuest : Quest
     {
-        private bool autoStart;
-
-        public override void Start()
-        {
-            if (autoStart)
-                Got();
-        }
-
+        int npcID;
         public ChatQuest(string parametr) : base(parametr)
         {
             List<string> parList = parametr.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
 
             var idIndex = parList.IndexOf("id");
 
-            int id = int.Parse(parList[idIndex + 1]);
-
-            NPCManagement.NPCManager.GetNPC(id).gameObject.AddComponent<Components.SenderComponent>();
+            npcID = int.Parse(parList[idIndex + 1]);
 
             var playIndex = parList.IndexOf("autoStart");
 
-            autoStart = bool.Parse(parList[playIndex + 1]);
+            bool autoStart = bool.Parse(parList[playIndex + 1]);
 
             if (autoStart)
-                DialogSystem.DialogText.DialogEndEvent += Pass;
+                GotQuest(0);
             else
-                DialogSystem.DialogText.DialogEndEvent += StartChatQuest;
+                DialogSystem.DialogText.DialogActionEvent += GotQuest;
+
+            DialogSystem.DialogText.DialogActionEvent += PassQuest;
         }
 
-
-        private void Pass(bool param)
+        private void PassQuest(int id)
         {
-            Pass();
+            if (id == QuestSystem.QuestManager.currentQuestID)
+                Pass();
         }
 
-        private void StartChatQuest(bool param)
+        private void GotQuest(int id)
         {
-            DialogSystem.DialogText.DialogEndEvent -= StartChatQuest;
             Got();
-            DialogSystem.DialogText.DialogEndEvent += Pass;
+            NPCManagement.NPCManager.GetNPC(npcID).gameObject.AddComponent<Components.SenderComponent>();
+
+            DialogSystem.DialogText.DialogActionEvent -= GotQuest;
+        }
+
+        public override void Destroy()
+        {
+            DialogSystem.DialogText.DialogActionEvent -= PassQuest;
         }
     }
 }

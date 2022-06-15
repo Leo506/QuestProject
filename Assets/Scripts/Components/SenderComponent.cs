@@ -10,13 +10,13 @@ namespace Components
     {
         private void OnEnable()
         {
-            DialogSystem.DialogText.DialogEndEvent += OnDialogEnd;
+            DialogSystem.DialogText.DialogActionEvent += OnDialogEnd;
         }
 
-        private void OnDialogEnd(bool action)
+        private void OnDialogEnd(int id)
         {
-            if (action)
-                Destroy(this);
+            Debug.Log("OnDialogEnd Sender");
+            Destroy(this);
         }
 
         public void Use()
@@ -26,7 +26,7 @@ namespace Components
 
         private void OnDestroy()
         {
-            DialogSystem.DialogText.DialogEndEvent += OnDialogEnd;
+            DialogSystem.DialogText.DialogEndEvent -= OnDialogEnd;
         }
     }
 }

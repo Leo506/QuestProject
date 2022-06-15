@@ -39,16 +39,25 @@ namespace Player
                 CutSceneTrigger.CutSceneStartEvent -= StopMove;
             }
 
-            private void StartMove(bool param)
+            private void StartMove(int id)
             {
                 currentSpeed = speed;
+            }
+
+            private void StartMove()
+            {
+                currentSpeed = speed;
+            }
+
+            private void StopMove(int id)
+            {
+                currentSpeed = 0;
             }
 
             private void StopMove()
             {
                 currentSpeed = 0;
             }
-
 
             // Update is called once per frame
             void Update()

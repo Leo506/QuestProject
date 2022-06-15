@@ -9,18 +9,21 @@ namespace DialogSystem
 {
     public class DialogText : MonoBehaviour
     {
-        public static event Action DialogStartEvent;
-        public static event Action<bool> DialogEndEvent;
+        public static event Action<int> DialogStartEvent;      // Событие начала диалога
+        public static event Action<int> DialogEndEvent;        // Событие окончания диалога
+        public static event Action<int> DialogActionEvent;     // Событие, обозначающее, что на данной фразе должно произойти действие
 
-        public static DialogText Instance;
+        public static DialogText Instance;  // Синглтон
+
+        private int currentDialogId;        // id текущего диалога
 
         [SerializeField] Text mainText;
         [SerializeField] Button[] answerButtons;
         [SerializeField] Canvas dialogCanvas;
 
-        DialogItem currentItem;
+        DialogItem currentItem;  // исопльзуется для продвижения по диалогу
 
-        // Start is called before the first frame update
+        
         void Start()
         {
             if (Instance != this && Instance != null)
@@ -33,7 +36,9 @@ namespace DialogSystem
 
         public void StartDialog(int id, string path = "/Dialogs/Dialog.xml")
         {
-            DialogStartEvent?.Invoke();
+            currentDialogId = id;
+
+            DialogStartEvent?.Invoke(currentDialogId);  // Сообщаем, что диалог начадся
 
             dialogCanvas.enabled = true;
             currentItem = XmlToDialog.ReadDialog(Application.streamingAssetsPath + path, id)[0];
@@ -52,28 +57,20 @@ namespace DialogSystem
         {
             if (item.Items.Count == 0)
             {
-                DialogEndEvent?.Invoke(item.HasAction);
-                
+                DialogEndEvent?.Invoke(currentDialogId);
+                DialogActionEvent?.Invoke(currentDialogId);
+
                 dialogCanvas.enabled = false;
                 return;
             }
 
-            string debug = "item phrase: " + item.Phrase;
-            for (int i = 0; i < item.Items.Count; i++)
-            {
-                debug += $" Items[{i}] phrase: {item.Items[i].Phrase}";
-            }
-            Debug.Log(debug);
+            if (item.HasAction)
+                DialogActionEvent?.Invoke(currentDialogId);
 
+            
             currentItem = item.Items[0];
 
-            debug = "item phrase: " + currentItem.Phrase;
-            for (int i = 0; i < currentItem.Items.Count; i++)
-            {
-                debug += $" Items[{i}] phrase: {currentItem.Items[i].Phrase}";
-            }
-            Debug.Log(debug);
-
+            
             mainText.text = currentItem.Phrase;
 
             for (int i = 0; i < answerButtons.Length; i++)

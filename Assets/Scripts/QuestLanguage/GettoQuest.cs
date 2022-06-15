@@ -28,12 +28,23 @@ namespace QuestLanguage
 
             NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<Components.SenderComponent>();
 
-            DialogSystem.DialogText.DialogEndEvent += param => { if (param) { TriggerBuilder.Instance.CreateTrigger(triggerPos); Got(); } };
+            DialogSystem.DialogText.DialogActionEvent += GotQuest;
+        }
+
+        private void GotQuest(int id)
+        {
+            Debug.Log("Getto quest: " + id + " expected: " + QuestSystem.QuestManager.currentQuestID);
+            if (id == QuestSystem.QuestManager.currentQuestID)
+            {
+                Got();
+                TriggerBuilder.Instance.CreateTrigger(triggerPos);
+            }
         }
 
         ~GettoQuest()
         {
             Trigger.OnTriggerEnterEvent -= Pass;
+            DialogSystem.DialogText.DialogActionEvent -= GotQuest;
         }
     }
 }
