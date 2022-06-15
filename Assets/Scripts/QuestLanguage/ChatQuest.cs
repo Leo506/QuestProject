@@ -9,10 +9,12 @@ namespace QuestLanguage
 {
     public class ChatQuest : Quest
     {
+        private bool autoStart;
 
         public override void Start()
         {
-            Got();
+            if (autoStart)
+                Got();
         }
 
         public ChatQuest(string parametr) : base(parametr)
@@ -25,9 +27,27 @@ namespace QuestLanguage
 
             NPCManagement.NPCManager.GetNPC(id).gameObject.AddComponent<Components.SenderComponent>();
 
-            Got();
+            var playIndex = parList.IndexOf("autoStart");
 
-            DialogSystem.DialogText.DialogEndEvent += param => Pass();
+            autoStart = bool.Parse(parList[playIndex + 1]);
+
+            if (autoStart)
+                DialogSystem.DialogText.DialogEndEvent += Pass;
+            else
+                DialogSystem.DialogText.DialogEndEvent += StartChatQuest;
+        }
+
+
+        private void Pass(bool param)
+        {
+            Pass();
+        }
+
+        private void StartChatQuest(bool param)
+        {
+            DialogSystem.DialogText.DialogEndEvent -= StartChatQuest;
+            Got();
+            DialogSystem.DialogText.DialogEndEvent += Pass;
         }
     }
 }
