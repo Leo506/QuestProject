@@ -49,4 +49,10 @@
       <Answer Text="Всегда пожалуйста" HasAction="false"/>
     </Phrase>
   </Dialog>
+
+  <Dialog id="3">
+    <Phrase Text="Привет" HasAction="false">
+      <Answer Text="Пока" HasAction="false"/>
+    </Phrase>
+  </Dialog>
 </Dialogs>
