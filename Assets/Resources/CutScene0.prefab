@@ -426,6 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasDialog: 1
+  dialogID: 0
 --- !u!135 &4295461299449606911
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -25,7 +25,8 @@ public class CutSceneTrigger : MonoBehaviour
 
     private void DestroyTrigger(string id)
     {
-        Destroy(this.gameObject);
+        if (id == dialogID)
+            Destroy(this.gameObject);
     }
 
     private void OnCutSceneStop(PlayableDirector obj)
@@ -37,6 +38,7 @@ public class CutSceneTrigger : MonoBehaviour
     private void OnDestroy()
     {
         director.stopped -= OnCutSceneStop;
+        DialogSystem.DialogText.DialogEndEvent -= DestroyTrigger;
     }
 
     private void OnTriggerEnter(Collider other)
