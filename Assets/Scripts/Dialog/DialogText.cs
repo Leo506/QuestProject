@@ -58,7 +58,9 @@ namespace DialogSystem
             if (item.Items.Count == 0)
             {
                 DialogEndEvent?.Invoke(currentDialogId);
-                DialogActionEvent?.Invoke(currentDialogId);
+
+                if (item.HasAction)
+                    DialogActionEvent?.Invoke(currentDialogId);
 
                 dialogCanvas.enabled = false;
                 return;
