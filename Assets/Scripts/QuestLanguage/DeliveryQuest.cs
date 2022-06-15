@@ -38,7 +38,7 @@ namespace QuestLanguage
                 Got();
         }
 
-        ~DeliveryQuest()
+        public override void Destroy()
         {
             DialogSystem.DialogText.DialogActionEvent -= GotQuest;
         }

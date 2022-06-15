@@ -24,6 +24,7 @@ public class QuestText : MonoBehaviour
 
     private void ClearAllTexts(QuestLanguage.Quest quest)
     {
+        Debug.Log("Quest text. Clear all text");
         if (titleText.text == quest.QuestName)
         {
             titleText.text = "";
