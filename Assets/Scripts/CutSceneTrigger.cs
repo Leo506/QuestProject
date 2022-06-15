@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 public class CutSceneTrigger : MonoBehaviour
 {
     [SerializeField] bool hasDialog;
+    [SerializeField] int dialogID;
 
     private PlayableDirector director;
 
@@ -23,7 +24,7 @@ public class CutSceneTrigger : MonoBehaviour
     private void OnCutSceneStop(PlayableDirector obj)
     {
         if (hasDialog)
-            DialogSystem.DialogText.Instance.StartDialog(0, "/CutScenes/Dialog.xml");
+            DialogSystem.DialogText.Instance.StartDialog(dialogID, "/CutScenes/Dialog.xml");
     }
 
     private void OnDestroy()
