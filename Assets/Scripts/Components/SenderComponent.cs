@@ -13,7 +13,7 @@ namespace Components
             DialogSystem.DialogText.DialogActionEvent += OnDialogEnd;
         }
 
-        private void OnDialogEnd(int id)
+        private void OnDialogEnd(string id)
         {
             Debug.Log("OnDialogEnd Sender");
             Destroy(this);
@@ -21,7 +21,7 @@ namespace Components
 
         public void Use()
         {
-            DialogSystem.DialogText.Instance.StartDialog(QuestSystem.QuestManager.currentQuestID);
+            DialogSystem.DialogText.Instance.StartDialog(QuestSystem.QuestManager.currentQuestID.ToString());
         }
 
         private void OnDestroy()

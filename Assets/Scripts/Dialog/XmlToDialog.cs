@@ -10,7 +10,7 @@ namespace DialogSystem
 {
     public class XmlToDialog
     {
-        public static List<DialogItem> ReadDialog(string path, int id)
+        public static List<DialogItem> ReadDialog(string path, string id)
         {
             if (!File.Exists(path))
                 return null;

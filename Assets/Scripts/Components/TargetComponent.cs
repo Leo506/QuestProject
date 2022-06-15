@@ -11,12 +11,12 @@ namespace Components
 
         public void Use()
         {
-            DialogSystem.DialogText.Instance.StartDialog(-QuestSystem.QuestManager.currentQuestID);
+            DialogSystem.DialogText.Instance.StartDialog((-QuestSystem.QuestManager.currentQuestID).ToString());
 
             DialogSystem.DialogText.DialogActionEvent += GotMail;
         }
 
-        private void GotMail(int id)
+        private void GotMail(string id)
         {
             TargetGotMailEvent?.Invoke();
             Destroy(this);

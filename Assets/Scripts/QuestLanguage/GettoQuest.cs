@@ -31,10 +31,10 @@ namespace QuestLanguage
             DialogSystem.DialogText.DialogActionEvent += GotQuest;
         }
 
-        private void GotQuest(int id)
+        private void GotQuest(string id)
         {
             Debug.Log("Getto quest: " + id + " expected: " + QuestSystem.QuestManager.currentQuestID);
-            if (id == QuestSystem.QuestManager.currentQuestID)
+            if (id == QuestSystem.QuestManager.currentQuestID.ToString())
             {
                 Got();
                 TriggerBuilder.Instance.CreateTrigger(triggerPos);

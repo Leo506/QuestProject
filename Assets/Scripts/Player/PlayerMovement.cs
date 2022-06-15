@@ -39,7 +39,7 @@ namespace Player
                 CutSceneTrigger.CutSceneStartEvent -= StopMove;
             }
 
-            private void StartMove(int id)
+            private void StartMove(string id)
             {
                 currentSpeed = speed;
             }
@@ -49,7 +49,7 @@ namespace Player
                 currentSpeed = speed;
             }
 
-            private void StopMove(int id)
+            private void StopMove(string id)
             {
                 currentSpeed = 0;
             }

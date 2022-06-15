@@ -9,13 +9,13 @@ namespace DialogSystem
 {
     public class DialogText : MonoBehaviour
     {
-        public static event Action<int> DialogStartEvent;      // Событие начала диалога
-        public static event Action<int> DialogEndEvent;        // Событие окончания диалога
-        public static event Action<int> DialogActionEvent;     // Событие, обозначающее, что на данной фразе должно произойти действие
+        public static event Action<string> DialogStartEvent;      // Событие начала диалога
+        public static event Action<string> DialogEndEvent;        // Событие окончания диалога
+        public static event Action<string> DialogActionEvent;     // Событие, обозначающее, что на данной фразе должно произойти действие
 
         public static DialogText Instance;  // Синглтон
 
-        private int currentDialogId;        // id текущего диалога
+        private string currentDialogId;        // id текущего диалога
 
         [SerializeField] Text mainText;
         [SerializeField] Button[] answerButtons;
@@ -34,7 +34,7 @@ namespace DialogSystem
             DialogButton.ChooseAnswerEvent += OnAnswerSelected;
         }
 
-        public void StartDialog(int id, string path = "/Dialogs/Dialog.xml")
+        public void StartDialog(string id, string path = "/Dialogs/Dialog.xml")
         {
             currentDialogId = id;
 
