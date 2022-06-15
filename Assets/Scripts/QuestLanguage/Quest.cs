@@ -8,12 +8,14 @@ namespace QuestLanguage
 {
     public class Quest
     {
-        public static event System.Action QuestPassedEvent;
+        public static event System.Action<Quest> QuestPassedEvent;
+        public static event System.Action<Quest> QuestGotEvent;
 
         public string QuestName { get; protected set; }
         public string QuestDescription { get; protected set; }
 
-        public void Pass() => QuestPassedEvent?.Invoke();
+        public void Pass() => QuestPassedEvent?.Invoke(this);
+        public void Got() => QuestGotEvent?.Invoke(this);
         public virtual void Start() { }
 
         public Quest(string parametrs)

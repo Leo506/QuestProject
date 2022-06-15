@@ -9,8 +9,6 @@ namespace QuestSystem
 {
     public class QuestManager
     {
-
-        public static event Action<QuestLanguage.Quest> QuestIsGotEvent;
         public static int currentQuestID { get; private set; }
 
         private static QuestLanguage.Quest currentQuest;
@@ -19,21 +17,12 @@ namespace QuestSystem
         {
             currentQuestID = 1;
             QuestLanguage.Quest.QuestPassedEvent += OnQuestPass;
-            DialogSystem.DialogText.DialogEndEvent += QuestGot;
             LoadQuest();
             Debug.Log("Quest is loaded");
         }
 
-        private static void QuestGot(bool action)
-        {
-            if (!action)
-                return;
 
-            currentQuest.Start();
-            QuestIsGotEvent?.Invoke(currentQuest);
-        }
-
-        private static void OnQuestPass()
+        private static void OnQuestPass(Quest quest)
         {
             currentQuestID++;
             LoadQuest();
@@ -53,6 +42,7 @@ namespace QuestSystem
             QuestLanguage.Quest quest = parser.CreateQuest() as QuestLanguage.Quest;
 
             currentQuest = quest;
+            currentQuest.Start();
         }
     }
 }

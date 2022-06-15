@@ -12,7 +12,7 @@ public class QuestText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        QuestSystem.QuestManager.QuestIsGotEvent += OnQuestGiven;
+        QuestLanguage.Quest.QuestGotEvent += OnQuestGiven;
         QuestLanguage.Quest.QuestPassedEvent += ClearAllTexts;
     }
 
@@ -22,15 +22,18 @@ public class QuestText : MonoBehaviour
         descriptionText.text = quest.QuestDescription;
     }
 
-    private void ClearAllTexts()
+    private void ClearAllTexts(QuestLanguage.Quest quest)
     {
-        titleText.text = "";
-        descriptionText.text = "";
+        if (titleText.text == quest.QuestName)
+        {
+            titleText.text = "";
+            descriptionText.text = "";
+        }
     }
 
     private void OnDestroy()
     {
-        QuestSystem.QuestManager.QuestIsGotEvent -= OnQuestGiven;
+        QuestLanguage.Quest.QuestGotEvent -= OnQuestGiven;
         QuestLanguage.Quest.QuestPassedEvent -= ClearAllTexts;
     }
 }

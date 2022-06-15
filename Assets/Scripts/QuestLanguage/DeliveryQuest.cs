@@ -11,11 +11,6 @@ namespace QuestLanguage
         int fromID;
         int toID;
 
-        public override void Start()
-        {
-            
-        }
-
         public DeliveryQuest(string parametrs) : base(parametrs)
         {
             Debug.Log(parametrs);
@@ -33,7 +28,7 @@ namespace QuestLanguage
             var target = NPCManagement.NPCManager.GetNPC(toID).gameObject.AddComponent<Components.TargetComponent>();
             target.TargetGotMailEvent += Pass;
 
-            Debug.Log("Delivery quest name: " + QuestName + " Description: " + QuestDescription);
+            DialogSystem.DialogText.DialogEndEvent += param => { if (param) Got(); };
         }
     }
 }

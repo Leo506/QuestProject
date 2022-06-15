@@ -11,12 +11,6 @@ namespace QuestLanguage
         Vector3 triggerPos;
         int fromID;
 
-        public override void Start()
-        {
-            
-            TriggerBuilder.Instance.CreateTrigger(triggerPos);
-        }
-
         public GettoQuest(string parametrs) : base(parametrs)
         {
             List<string> parList = parametrs.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -34,7 +28,7 @@ namespace QuestLanguage
 
             NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<Components.SenderComponent>();
 
-            Debug.Log("Getto quest is created. Trigger position: " + triggerPos);
+            DialogSystem.DialogText.DialogEndEvent += param => { if (param) { TriggerBuilder.Instance.CreateTrigger(triggerPos); Got(); } };
         }
 
         ~GettoQuest()
