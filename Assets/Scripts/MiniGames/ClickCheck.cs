@@ -10,6 +10,9 @@ namespace MiniGames.Osu
         [SerializeField] Transform root;
         [SerializeField] GameObject circlePrefab;
         [SerializeField] float accuracy;
+        [SerializeField] Text scoreText;
+
+        private int score = 0;
 
         private NarrowingCircle circle;
 
@@ -27,8 +30,8 @@ namespace MiniGames.Osu
             float maxX = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x;
 
             
-            var randomY = Random.Range(-Screen.height / 2, Screen.height / 2);
-            var randomX = Random.Range(-Screen.width / 2, Screen.width / 2);
+            var randomY = Random.Range(-Screen.height / 2 + 371, Screen.height / 2 - 371);
+            var randomX = Random.Range(-Screen.width / 2 + 251, Screen.width / 2 - 251);
 
             Vector2 randomScreenPos = new Vector2(randomX, randomY);
             Debug.Log("Spawn pos: " + randomScreenPos);
@@ -52,7 +55,8 @@ namespace MiniGames.Osu
 
             if (size.x == 1 || size.x - 1 <= accuracy)
             {
-                Debug.Log("OK!!!");
+                score++;
+                scoreText.text = "Score: " + score.ToString();
                 Destroy(circle.transform.parent.gameObject);
                 SpawnCircle();
             }
