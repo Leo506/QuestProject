@@ -2,7 +2,23 @@
 <Dialogs>
   <Dialog id="0">
     <Phrase Text="Оп-па, кто к нам колеса катит?" HasAction="false">
-      <Answer Text="не твое дело" HasAction="false"/>
+      <Answer Text="Не твоего, собачьего ума, дела!" HasAction="false">
+        <Phrase Text="Ты че такой борзый, а, подкидыш малолетний?" HasAction="false">
+          <Answer Text="Сам ты подкидыш недоношенный. Отойди, дай пройти" HasAction="false">
+            <Phrase Text="Оп-па, парни, да он похоже не знает. Не знает, что его той бабке подкинули. Ахаха" HasAction="false">
+              <Answer Text="Что за бред ты несешь?" HasAction="false">
+                <Phrase Text="Мне мамка моя рассказывала, что приходит как-то к этой имя попечителя, а у нее, бац, и ребенок. Хотя мужика у нее никогда не было. Так что, стало быть, ты подкидыш" HasAction="false">
+                  <Answer Text="Это неправда! Никакой я не подкидыш!!!" HasAction="false">
+                    <Phrase Text="Ахаха, пойдемте, парни, нечего зря время терять на этого подкидыша, который даже собственной матери не нужен. Ахахах" HasAction="false">
+                      <Answer Text="..." HasAction="true"/>
+                    </Phrase>
+                  </Answer>
+                </Phrase>
+              </Answer>
+            </Phrase>
+          </Answer>
+        </Phrase>
+      </Answer>
     </Phrase>
   </Dialog>
 </Dialogs>
