@@ -7,6 +7,8 @@ namespace MiniGames.Osu
 {
     public class NarrowingCircle : MonoBehaviour
     {
+        public event System.Action NarrowingEndEvent;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -28,7 +30,8 @@ namespace MiniGames.Osu
 
                 yield return new WaitForSeconds(0.001f);
             }
-            Destroy(gameObject);
+           
+            NarrowingEndEvent?.Invoke();
         }
     }
 }
