@@ -27,7 +27,7 @@ namespace QuestLanguage
             else
                 DialogSystem.DialogText.DialogActionEvent += GotQuest;
 
-            DialogSystem.DialogText.DialogActionEvent += PassQuest;
+            
         }
 
         private void PassQuest(string id)
@@ -42,6 +42,8 @@ namespace QuestLanguage
             NPCManagement.NPCManager.GetNPC(npcID).gameObject.AddComponent<Components.SenderComponent>();
 
             DialogSystem.DialogText.DialogActionEvent -= GotQuest;
+
+            DialogSystem.DialogText.DialogActionEvent += PassQuest;
         }
 
         public override void Destroy()

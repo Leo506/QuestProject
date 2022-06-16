@@ -1,52 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Dialogs>
   <Dialog id="1">
-    <Phrase Text="Привет, как дела?" HasAction="false">
-      <Answer Text="Привет, хорошо" HasAction="false">
-        <Phrase Text="Рад это слышать. Как тебя зовут?" HasAction="false">
-          <Answer Text="Не твое дело" HasAction="false">
-
-            <Phrase Text="Ну, не мое, так не мое. Не дам тебе задания" HasAction="false">
-
-              <Answer Text="..." HasAction="false"/>
-              
-            </Phrase>
-            
-          </Answer>
-          <Answer Text="Артем" HasAction="false">
-
-            <Phrase Text="Прекрасное имя. Дать работу?" HasAction="false">
-
-              <Answer Text="Да, спасибо" HasAction="true"/>
-              
-            </Phrase>
-            
-          </Answer>
+    <Phrase Text="Доброе утро, сынок, отнеси эту еду -имя- на другую часть района" HasAction="false">
+      <Answer Text="Конечно, без проблем" HasAction="false">
+        <Phrase Text="Только прошу тебя, будь осторожен. В последнее время бандиты стали активничать, не попадайся им на глаза" HasAction="false">
+          <Answer Text="Я не дам себя заметить" HasAction="true"/>
         </Phrase>
-      </Answer>
-      <Answer Text="Отвали" HasAction="false">
-        <Phrase Text="Не груби" HasAction="false">
-
-          <Answer Text="..." HasAction="false"/>
-          
-        </Phrase>
-      </Answer>
+      </Answer> 
     </Phrase>
   </Dialog>
 
   <Dialog id="-1">
-    <Phrase Text="Спасибо, что занес это мне" HasAction="false">
-      <Answer Text="Всегда пожалуйста" HasAction="true">
-        <Phrase Text="Иди теперь поговири с мамой" HasAction="false">
-          <Answer Text="Окей" HasAction="true"/>
+    <Phrase Text="О, вот так спасибо, так спасибо. А то я тут совсем оголодал. Ноги мои уже почти не ходят. Дааа…недолго мне осталось вас обременять, уйду скоро уж на тот свет" HasAction="false">
+      <Answer Text="ты же здесь давно живешь?" HasAction="true">
+        <Phrase Text="Ну да, давненько. Дольше, чем хотелось бы" HasAction="false">
+          <Answer Text="И мою маму знаешь давно?" HasAction="false">
+            <Phrase Text="А то, мы с ней давние друзья" HasAction="false">
+              <Answer Text="Тогда скажи мне, правда ли, что я подкидыш? Правда ли, что она мне не родная мать?" HasAction="false">
+                <Phrase Text="М-да…С чего ты вдруг это взял?" HasAction="false">
+                  <Answer Text="так сказал" HasAction="false">
+                    <Phrase Text="Нашел кого слушать. Он силен, но туп. Никогда не слушай его, понял? Никакой ты не подкидыш" HasAction="false">
+                      <Answer Text="Но…" HasAction="false">
+                        <Phrase Text="тебя любит. Разве этого не достаточно?" HasAction="false">
+                          <Answer Text="Достаточно, но…" HasAction="false">
+                            <Phrase Text="Ну и не нокай. Иди давай домой, да по сторонам гляди в оба." HasAction="false">
+                              <Answer Text="..." HasAction="true"/>
+                            </Phrase>
+                          </Answer>
+                        </Phrase>
+                      </Answer>
+                    </Phrase>
+                  </Answer>
+                </Phrase>
+              </Answer>
+            </Phrase>
+          </Answer>
         </Phrase>
       </Answer>
     </Phrase>
   </Dialog>
 
   <Dialog id="2">
-    <Phrase Text="Привет" HasAction="false">
-      <Answer Text="Пока" HasAction="true"/>
+    <Phrase Text="О, ты вернулся. Все прошло нормально?" HasAction="false">
+      <Answer Text="Да, ну то есть, почти" HasAction="false">
+        <Phrase Text="Что случилось?" HasAction="false">
+          <Answer Text="встретил. И он…." HasAction="false">
+            <Phrase Text="Он что то плохое тебе сделал?" HasAction="false">
+              <Answer Text="Нет. Он, ну, сказал, что меня подкинули и что ты не моя настоящая мама" HasAction="false">
+                <Phrase Text="..." HasAction="false">
+                  <Answer Text="Мама?" HasAction="false">
+                    <Phrase Text="Давно тебе стоило это рассказать. Прости, что скрывала это от тебя. Я не хотела, чтоб ты это знал." HasAction="false">
+                      <Answer Text="..." HasAction="false">
+                        <Phrase Text="Тебя действительно подкинули мне. Это было около 5-6 лет назад. Была ночь и лил сильный дождь. Я ложилась спать, как вдруг услышала детский крик на улице" HasAction="false">
+                          <Answer Text="Это был я?" HasAction="false">
+                            <Phrase Text="Да, это был ты. Но это уже дело прошлого. Ты теперь мой сын и я тебя никому не отдам" HasAction="false">
+                              <Answer Text="Но, почему ты не говорила мне этого раньше?" HasAction="false">
+                                <Phrase Text="Чтобы не травмировать тебя" HasAction="false">
+                                  <Answer Text="Почему я узнаю это от других!?!" HasAction="false">
+                                    <Phrase Text="Сынок, успокойся" HasAction="false">
+                                      <Answer Text="Я не твой сын!!!" HasAction="false">
+                                        <Phrase Text="Не говори такого! Ты теперь мой сын!" HasAction="false">
+                                          <Answer Text="..." HasAction="true"/>
+                                        </Phrase>
+                                      </Answer>
+                                    </Phrase>
+                                  </Answer>
+                                </Phrase>
+                              </Answer>
+                            </Phrase>
+                          </Answer>
+                        </Phrase>
+                      </Answer>
+                    </Phrase>
+                  </Answer>
+                </Phrase>
+              </Answer>
+            </Phrase>
+          </Answer>
+        </Phrase>
+      </Answer>
     </Phrase>
   </Dialog>
 

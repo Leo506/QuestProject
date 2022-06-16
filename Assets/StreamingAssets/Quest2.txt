@@ -1,1 +1,1 @@
-chat id 0 autoStart false name Поговорить с мамой description Поговорить
+chat id 0 autoStart false name Вернуться к маме description Еда передана. Теперь пора вернуться домой
