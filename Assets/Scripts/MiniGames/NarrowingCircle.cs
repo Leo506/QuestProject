@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace MiniGames
+namespace MiniGames.Osu
 {
     public class NarrowingCircle : MonoBehaviour
     {
@@ -28,6 +28,7 @@ namespace MiniGames
 
                 yield return new WaitForSeconds(0.001f);
             }
+            Destroy(gameObject);
         }
     }
 }
