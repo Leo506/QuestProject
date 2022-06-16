@@ -11,25 +11,22 @@ namespace MiniGames.Osu
         [SerializeField] GameObject circlePrefab;
         [SerializeField] float accuracy;
         [SerializeField] Text scoreText;
+        [SerializeField] Text roundText;
 
         private int score = 0;
+
+        private int currentNumber = 1;
 
         private NarrowingCircle circle;
 
         private void Start()
         {
             SpawnCircle();
+            roundText.gameObject.SetActive(false);
         }
 
         private void SpawnCircle()
-        {
-            float minY = Camera.main.ScreenToWorldPoint(Vector2.zero).y;
-            float maxY = Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y;
-
-            float minX = Camera.main.ScreenToWorldPoint(Vector2.zero).x;
-            float maxX = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x;
-
-            
+        {            
             var randomY = Random.Range(-Screen.height / 2 + 371, Screen.height / 2 - 371);
             var randomX = Random.Range(-Screen.width / 2 + 251, Screen.width / 2 - 251);
 
@@ -38,12 +35,11 @@ namespace MiniGames.Osu
 
             var obj = Instantiate(circlePrefab, root);
             obj.transform.localPosition = randomScreenPos;
+            obj.GetComponentInChildren<Text>().text = currentNumber.ToString();
+            obj.GetComponent<Button>().onClick.AddListener(OnClick);
 
             circle = obj.GetComponentInChildren<NarrowingCircle>();
             circle.NarrowingEndEvent += SpawnCircle;
-
-            obj.GetComponent<Button>().onClick.AddListener(OnClick);
-            
         }
 
         public void OnClick()
@@ -57,9 +53,29 @@ namespace MiniGames.Osu
             {
                 score++;
                 scoreText.text = "Score: " + score.ToString();
-                Destroy(circle.transform.parent.gameObject);
-                SpawnCircle();
+
+                currentNumber++;
+                if (currentNumber > 5)
+                {
+                    currentNumber = 1;
+                    RoundEnd();
+                }
+                else
+                {
+                    Destroy(circle.transform.parent.gameObject);
+                    SpawnCircle();
+                }
             }
+        }
+
+        private void RoundEnd()
+        {
+            Debug.Log("Round end");
+            circle.NarrowingEndEvent -= SpawnCircle;
+            
+            roundText.gameObject.SetActive(true);
+
+            Invoke("Start", 5);
         }
     }
 }

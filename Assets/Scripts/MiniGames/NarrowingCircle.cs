@@ -18,7 +18,7 @@ namespace MiniGames.Osu
         
         IEnumerator Narrowing()
         {
-            int countOfIter = 500;
+            int countOfIter = 200;
             float desc = (transform.localScale.x - 1) / countOfIter;
             for (int i = 0; i < countOfIter; i++)
             {
