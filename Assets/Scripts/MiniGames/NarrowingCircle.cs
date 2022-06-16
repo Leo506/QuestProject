@@ -7,31 +7,29 @@ namespace MiniGames.Osu
 {
     public class NarrowingCircle : MonoBehaviour
     {
+        [SerializeField] float speed;
+        [SerializeField] float accuracy;
+
         public event System.Action NarrowingEndEvent;
 
         // Start is called before the first frame update
         void Start()
         {
-            StartCoroutine(Narrowing());
+            //StartCoroutine(Narrowing());
         }
 
-        
-        IEnumerator Narrowing()
+        private void Update()
         {
-            int countOfIter = 200;
-            float desc = (transform.localScale.x - 1) / countOfIter;
-            for (int i = 0; i < countOfIter; i++)
+            var size = transform.localScale;
+            transform.localScale = Vector3.MoveTowards(transform.localScale, new Vector3(1, 1, 1), speed * Time.deltaTime);
+
+            
+
+            if (transform.localScale.x - 1 <= accuracy)
             {
-                var size = transform.localScale;
-                size.x -= desc;
-                size.y -= desc;
-
-                transform.localScale = size;
-
-                yield return new WaitForSeconds(0.001f);
+                NarrowingEndEvent?.Invoke();
+                Destroy(this);
             }
-           
-            NarrowingEndEvent?.Invoke();
         }
     }
 }
