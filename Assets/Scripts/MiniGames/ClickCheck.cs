@@ -20,8 +20,18 @@ namespace MiniGames.Osu
 
         private NarrowingCircle circle;
 
+        private bool gameOver = false;
+
+        private void OnGameOver(bool obj)
+        {
+            gameOver = true;
+        }
+
         private void Start()
         {
+            GameLogic.Instance.GameOverEvent += OnGameOver;
+
+            
             SpawnCircle();
         }
 
@@ -81,8 +91,8 @@ namespace MiniGames.Osu
             scoreText.text = "Score: " + score.ToString();
             circle.NarrowingEndEvent -= SpawnCircle;
 
-
-            Invoke("Start", 5);
+            if (!gameOver)
+                Invoke("SpawnCircle", 5);
         }
     }
 }
