@@ -11,7 +11,8 @@ namespace MiniGames.Osu
         [SerializeField] GameObject circlePrefab;
         [SerializeField] float accuracy;
         [SerializeField] Text scoreText;
-        [SerializeField] Text roundText;
+
+        public event System.Action<int> RoundEndEvent; // TODO не соотвествеут зоне отвественности скрипта. Перенести
 
         private int score = 0;
 
@@ -22,9 +23,10 @@ namespace MiniGames.Osu
         private void Start()
         {
             SpawnCircle();
-            roundText.gameObject.SetActive(false);
         }
 
+
+        // TODO не соотвествеут зоне отвественности скрипта. Перенести
         private void SpawnCircle()
         {            
             currentNumber++;
@@ -70,12 +72,15 @@ namespace MiniGames.Osu
             }
         }
 
+
+        // TODO не соотвествеут зоне отвественности скрипта. Перенести
         private void RoundEnd()
         {
+            RoundEndEvent?.Invoke(score);
             score = 0;
+            scoreText.text = "Score: " + score.ToString();
             circle.NarrowingEndEvent -= SpawnCircle;
-            
-            roundText.gameObject.SetActive(true);
+
 
             Invoke("Start", 5);
         }
