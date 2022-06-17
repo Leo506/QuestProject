@@ -15,7 +15,7 @@ namespace MiniGames.Osu
 
         private int score = 0;
 
-        private int currentNumber = 1;
+        private int currentNumber = 0;
 
         private NarrowingCircle circle;
 
@@ -27,6 +27,14 @@ namespace MiniGames.Osu
 
         private void SpawnCircle()
         {            
+            currentNumber++;
+            if (currentNumber > 5)
+            {
+                currentNumber = 0;
+                RoundEnd();
+                return;
+            }
+
             var randomY = Random.Range(-Screen.height / 2 + 371, Screen.height / 2 - 371);
             var randomX = Random.Range(-Screen.width / 2 + 251, Screen.width / 2 - 251);
 
@@ -40,6 +48,8 @@ namespace MiniGames.Osu
 
             circle = obj.GetComponentInChildren<NarrowingCircle>();
             circle.NarrowingEndEvent += SpawnCircle;
+
+            
         }
 
         public void OnClick()
@@ -54,23 +64,15 @@ namespace MiniGames.Osu
                 score++;
                 scoreText.text = "Score: " + score.ToString();
 
-                currentNumber++;
-                if (currentNumber > 5)
-                {
-                    currentNumber = 1;
-                    RoundEnd();
-                }
-                else
-                {
-                    Destroy(circle.transform.parent.gameObject);
-                    SpawnCircle();
-                }
+               
+                Destroy(circle.transform.parent.gameObject);
+                SpawnCircle();
             }
         }
 
         private void RoundEnd()
         {
-            Debug.Log("Round end");
+            score = 0;
             circle.NarrowingEndEvent -= SpawnCircle;
             
             roundText.gameObject.SetActive(true);
