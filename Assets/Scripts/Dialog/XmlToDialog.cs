@@ -11,7 +11,7 @@ namespace DialogSystem
     public class XmlToDialog
     {
         /// <summary>
-        /// Создает структуру диалога
+        /// Создает структуру диалога, используя xml-файл
         /// </summary>
         /// <param name="path">Путь к файлу диалога</param>
         /// <param name="id">id диалога</param>
@@ -23,10 +23,31 @@ namespace DialogSystem
 
             XDocument doc = XDocument.Load(path);
 
+            return CreateDialog(doc, id);
+        }
+
+
+
+        /// <summary>
+        /// Создает структуру диалога, используя строки xml
+        /// </summary>
+        /// <param name="str">xml, представленный в виде строки</param>
+        /// <param name="id">id диалога</param>
+        /// <returns></returns>
+        public static Phrase ReadDialogByString(string str, string id)
+        {
+            XDocument doc = XDocument.Parse(str);
+
+            return CreateDialog(doc, id);
+        }
+
+
+        private static Phrase CreateDialog(XDocument doc, string id)
+        {
             var root = doc.Root;
 
             var dialogElement = root.Elements("Dialog").Where(e => e.Attribute("id").Value == id.ToString()).FirstOrDefault();
-            
+
             return CreateItem(dialogElement, "start");
         }
 
