@@ -3,3 +3,4 @@ spawn [type of spawing object] pos [vector3 - position in world space] [specifie
       - CutSceneTrigger parametrs: scene [cutscene prefab id]
 chat id [npc id] autoStart [true / false] name [quest name/title] description [quest description]
 getto pos [vector3 world position] from [npc id] name [quest name/title] description [quest description]
+minigame id [mini game id] name [quest name/title] description [quest description]
