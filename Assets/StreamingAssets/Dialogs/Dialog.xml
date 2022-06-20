@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Dialogs>
   <Dialog id="1">
-    <Phrase Text="Доброе утро, сынок, отнеси эту еду -имя- на другую часть района" HasAction="false">
-      <Answer Text="Конечно, без проблем" HasAction="false">
-        <Phrase Text="Только прошу тебя, будь осторожен. В последнее время бандиты стали активничать, не попадайся им на глаза" HasAction="false">
-          <Answer Text="Я не дам себя заметить" HasAction="true"/>
-        </Phrase>
-      </Answer> 
+    <Phrase Text="Some text" id="0">
+      <Answer Text="Answer 1" next=""/>
+      <Answer Text="Answer 2" exit="true"/>
+    </Phrase>
+  
+    <Phrase Text="Some text" id="1">
+      <Answer Text="Answer 3" exit="true"/>
     </Phrase>
   </Dialog>
 
