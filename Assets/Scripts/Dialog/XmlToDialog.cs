@@ -70,6 +70,9 @@ namespace DialogSystem
                     answer1.Exit = true;
                 }
 
+                if (answer.Attribute("HasAction") != null)
+                    answer1.HasAction = bool.Parse(answer.Attribute("HasAction").Value);
+
                 phrase.answers.Add(answer1);
             }
 

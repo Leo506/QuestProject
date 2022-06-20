@@ -12,6 +12,16 @@ namespace DialogSystem
 
         public Phrase Next { get; set; }
 
-        public bool Exit = false;
+        public bool Exit { get; set; }
+
+        public bool HasAction { get; set; }
+
+        public Answer()
+        {
+            Text = "";
+            Next = null;
+            Exit = false;
+            HasAction = false;
+        }
     }
 }

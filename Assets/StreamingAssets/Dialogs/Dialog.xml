@@ -7,7 +7,7 @@
     </Phrase>
   
     <Phrase Text="Some text 2" id="1">
-      <Answer Text="Answer 3" exit="true"/>
+      <Answer Text="Answer 3" exit="true" HasAction="true"/>
     </Phrase>
   </Dialog>
 

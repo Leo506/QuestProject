@@ -51,12 +51,16 @@ namespace DialogSystem
 
         private void OnAnswerSelected(Answer item)
         {
+            if (item.HasAction)
+                DialogActionEvent?.Invoke(currentDialogId);
+
             if (item.Exit)
             {
                 DialogEndEvent?.Invoke(currentDialogId);
                 dialogCanvas.enabled = false;
                 return;
             }
+            
 
             currentPhrase = item.Next;
             mainText.text = currentPhrase.Text;
