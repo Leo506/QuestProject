@@ -1,1 +1,1 @@
-getto pos 1 1 1 from 0 name Добраться до description Доберись до цели
+minigame id 0 name Победить главу хулиганов description Победи,что не понятно?

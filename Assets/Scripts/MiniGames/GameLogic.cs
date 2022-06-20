@@ -17,7 +17,7 @@ namespace MiniGames.Osu
 
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             Instance = this;
             check.RoundEndEvent += OnRoundEnd;

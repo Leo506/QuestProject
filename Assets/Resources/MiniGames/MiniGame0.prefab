@@ -990,7 +990,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7697976084527219770}
   m_Layer: 0
-  m_Name: OsuMiniGame
+  m_Name: MiniGame0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
