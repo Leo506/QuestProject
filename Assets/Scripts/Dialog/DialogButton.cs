@@ -8,9 +8,9 @@ namespace DialogSystem
 {
     public class DialogButton : MonoBehaviour
     {
-        public DialogItem item;
+        public Answer answer;
 
-        public static event System.Action<DialogItem> ChooseAnswerEvent;
+        public static event System.Action<Answer> ChooseAnswerEvent;
 
         private void Start()
         {
@@ -20,7 +20,7 @@ namespace DialogSystem
 
         private void OnAnswerSelected()
         {
-            ChooseAnswerEvent?.Invoke(item);
+            ChooseAnswerEvent?.Invoke(answer);
         }
     }
 }

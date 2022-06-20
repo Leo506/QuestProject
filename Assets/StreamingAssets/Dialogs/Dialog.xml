@@ -6,7 +6,7 @@
       <Answer Text="Answer 2" exit="true"/>
     </Phrase>
   
-    <Phrase Text="Some text" id="1">
+    <Phrase Text="Some text 2" id="1">
       <Answer Text="Answer 3" exit="true"/>
     </Phrase>
   </Dialog>

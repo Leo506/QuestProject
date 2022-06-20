@@ -21,7 +21,7 @@ namespace DialogSystem
         [SerializeField] Button[] answerButtons;
         [SerializeField] Canvas dialogCanvas;
 
-        DialogItem currentItem;  // исопльзуется для продвижения по диалогу
+        Phrase currentPhrase;  // исопльзуется для продвижения по диалогу
 
         
         void Start()
@@ -32,6 +32,8 @@ namespace DialogSystem
             Instance = this;
 
             DialogButton.ChooseAnswerEvent += OnAnswerSelected;
+
+            StartDialog("1");
         }
 
         public void StartDialog(string id, string path = "/Dialogs/Dialog.xml")
@@ -41,46 +43,37 @@ namespace DialogSystem
             DialogStartEvent?.Invoke(currentDialogId);  // Сообщаем, что диалог начадся
 
             dialogCanvas.enabled = true;
-            currentItem = null;
-            mainText.text = currentItem.Phrase;
+            currentPhrase = XmlToDialog.ReadDialog(Application.streamingAssetsPath+path, id);
+            mainText.text = currentPhrase.Text;
 
-            for (int i = 0; i < answerButtons.Length; i++)
-            {
-                string newText = i >= currentItem.Items.Count ? "" : currentItem.Items[i].Phrase;
-
-                answerButtons[i].GetComponent<Text>().text = newText;
-                answerButtons[i].GetComponent<DialogButton>().item = i >= currentItem.Items.Count ? null : currentItem.Items[i];
-            }
+            SetButtons();
         }
 
-        private void OnAnswerSelected(DialogItem item)
+        private void OnAnswerSelected(Answer item)
         {
-            if (item.Items.Count == 0)
+            if (item.Exit)
             {
                 DialogEndEvent?.Invoke(currentDialogId);
-
-                if (item.HasAction)
-                    DialogActionEvent?.Invoke(currentDialogId);
-
                 dialogCanvas.enabled = false;
                 return;
             }
 
-            if (item.HasAction)
-                DialogActionEvent?.Invoke(currentDialogId);
+            currentPhrase = item.Next;
+            mainText.text = currentPhrase.Text;
 
-            
-            currentItem = item.Items[0];
+            SetButtons();
+        }
 
-            
-            mainText.text = currentItem.Phrase;
 
+        private void SetButtons()
+        {
             for (int i = 0; i < answerButtons.Length; i++)
             {
-                string newText = i >= currentItem.Items.Count ? "" : currentItem.Items[i].Phrase;
+                string text = i >= currentPhrase.answers.Count ? "" : currentPhrase.answers[i].Text;
+                Answer answer = i >= currentPhrase.answers.Count ? null : currentPhrase.answers[i];
 
-                answerButtons[i].GetComponent<Text>().text = newText;
-                answerButtons[i].GetComponent<DialogButton>().item = i >= currentItem.Items.Count ? null : currentItem.Items[i];
+                answerButtons[i].GetComponent<Text>().text = text;
+                answerButtons[i].GetComponent<DialogButton>().answer = answer;
             }
         }
     }
