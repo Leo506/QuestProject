@@ -41,7 +41,7 @@ namespace DialogSystem
             DialogStartEvent?.Invoke(currentDialogId);  // Сообщаем, что диалог начадся
 
             dialogCanvas.enabled = true;
-            currentItem = XmlToDialog.ReadDialog(Application.streamingAssetsPath + path, id)[0];
+            currentItem = null;
             mainText.text = currentItem.Phrase;
 
             for (int i = 0; i < answerButtons.Length; i++)

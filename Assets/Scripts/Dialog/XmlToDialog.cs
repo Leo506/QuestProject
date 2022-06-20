@@ -36,10 +36,11 @@ namespace DialogSystem
             Phrase phrase = new Phrase();
             phrase.Text = phraseElement.Attribute("Text").Value;
 
-            foreach (var answer in phraseElement.Elements("Answers"))
+            foreach (var answer in phraseElement.Elements("Answer"))
             {
                 Answer answer1 = new Answer();
                 answer1.Text = answer.Attribute("Text").Value;
+                //UnityEngine.Debug.Log(answer1.Text);
                 if (answer.Attribute("next") != null)
                     answer1.Next = CreateItem(element, answer.Attribute("next").Value);
                 else
