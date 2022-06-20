@@ -10,7 +10,13 @@ namespace DialogSystem
 {
     public class XmlToDialog
     {
-        public static List<DialogItem> ReadDialog(string path, string id)
+        /// <summary>
+        /// Создает структуру диалога
+        /// </summary>
+        /// <param name="path">Путь к файлу диалога</param>
+        /// <param name="id">id диалога</param>
+        /// <returns></returns>
+        public static Phrase ReadDialog(string path, string id)
         {
             if (!File.Exists(path))
                 return null;
@@ -21,31 +27,31 @@ namespace DialogSystem
 
             var dialogElement = root.Elements("Dialog").Where(e => e.Attribute("id").Value == id.ToString()).FirstOrDefault();
             
-            return CreateItem(dialogElement);
+            return CreateItem(dialogElement, "start");
         }
 
-        private static List<DialogItem> CreateItem(XElement element)
+        private static Phrase CreateItem(XElement element, string id)
         {
-            List<DialogItem> toReturn = new List<DialogItem>();
-            foreach (var item in element.Elements("Phrase"))
-            {
-                DialogItem dialog = new DialogItem();
-                dialog.SetPhrase(item.Attribute("Text").Value);
-                dialog.HasAction = bool.Parse(item.Attribute("HasAction").Value);
+            var phraseElement = element.Elements("Phrase").Where(e => e.Attribute("id").Value == id).FirstOrDefault();
+            Phrase phrase = new Phrase();
+            phrase.Text = phraseElement.Attribute("Text").Value;
 
-                foreach (var answer in item.Elements("Answer"))
+            foreach (var answer in phraseElement.Elements("Answers"))
+            {
+                Answer answer1 = new Answer();
+                answer1.Text = answer.Attribute("Text").Value;
+                if (answer.Attribute("next") != null)
+                    answer1.Next = CreateItem(element, answer.Attribute("next").Value);
+                else
                 {
-                    string text = answer.Attribute("Text").Value;
-                    bool hasAction = bool.Parse(answer.Attribute("HasAction").Value);
-                    DialogItem dialogItem = new DialogItem(text, CreateItem(answer));
-                    dialogItem.HasAction = hasAction;
-                    dialog.AddItem(dialogItem);
+                    answer1.Next = null;
+                    answer1.Exit = true;
                 }
 
-                toReturn.Add(dialog);
+                phrase.answers.Add(answer1);
             }
 
-            return toReturn;
+            return phrase;
         }
     }
 }

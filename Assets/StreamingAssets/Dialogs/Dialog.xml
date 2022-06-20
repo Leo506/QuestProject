@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Dialogs>
   <Dialog id="1">
-    <Phrase Text="Some text" id="0">
-      <Answer Text="Answer 1" next=""/>
+    <Phrase Text="Some text" id="start">
+      <Answer Text="Answer 1" next="1"/>
       <Answer Text="Answer 2" exit="true"/>
     </Phrase>
   

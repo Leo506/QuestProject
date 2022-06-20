@@ -9,6 +9,6 @@ namespace DialogSystem
     public class Phrase
     {
         public string Text { get; set; }
-        public List<Answer> answers;
+        public List<Answer> answers = new List<Answer>();
     }
 }
