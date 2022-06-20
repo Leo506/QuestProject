@@ -1,1 +1,2 @@
+jump to scene TestScene
 minigame id 0 name Победить главу хулиганов description Победи,что не понятно?
