@@ -33,7 +33,6 @@ namespace DialogSystem
 
             DialogButton.ChooseAnswerEvent += OnAnswerSelected;
 
-            StartDialog("1");
         }
 
         public void StartDialog(string id, string path = "/Dialogs/Dialog.xml")
