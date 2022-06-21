@@ -66,8 +66,10 @@ namespace Player
                 Vector3 movement = input.GetInputDir();
                 movement *= currentSpeed * Time.deltaTime;
 
-                if (movement != Vector3.zero)
-                    transform.rotation = Quaternion.LookRotation(movement, Vector3.up);
+                if (movement == Vector3.zero)
+                    return;
+
+                transform.rotation = Quaternion.LookRotation(movement, Vector3.up);
 
                 if (!characterController.isGrounded)
                     movement = new Vector3(movement.x, -10, movement.z);

@@ -16,7 +16,8 @@ public class CheckpointsController : MonoBehaviour
         checkpointsSystem = new CheckpointsSystem(new FileManipulator());
 
         playerTransform = FindObjectOfType<Player.PlayerLogic>().transform;
-        // TODO подписка на событие смерти персонажа
+
+        Player.PlayerLogic.PlayerDiedEvent += LoadCheckpoint;
         QuestLanguage.Quest.QuestGotEvent += CreateCheckpoint;
     }
 
@@ -28,7 +29,13 @@ public class CheckpointsController : MonoBehaviour
 
     private void LoadCheckpoint()
     {
+        Debug.Log("Load checkpoint");
         checkpointsSystem.LoadCheckpoint();
         CheckpointLoadedEvent?.Invoke(checkpointsSystem.checkpoint);
+        /*var tmp = checkpointsSystem.checkpoint;
+        Vector3 pos = new Vector3(tmp.playerX, tmp.playerY, tmp.playerZ);
+        Debug.Log("Checkpoints pos: " + pos);
+        FindObjectOfType<Player.PlayerLogic>().transform.SetPositionAndRotation(pos, Quaternion.identity);
+        */
     }
 }
