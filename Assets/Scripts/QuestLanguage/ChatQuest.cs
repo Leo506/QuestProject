@@ -12,7 +12,7 @@ namespace QuestLanguage
         int npcID;
         public ChatQuest(string parametr) : base(parametr)
         {
-            List<string> parList = parametr.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> parList = parametr.GetWords();
 
             var idIndex = parList.IndexOf("id");
 

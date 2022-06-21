@@ -11,7 +11,7 @@ namespace QuestLanguage
     {
         public Jump(string parametr)
         {
-            List<string> parList = parametr.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> parList = parametr.GetWords();
 
             var index = parList.FindIndex(s => s == "to");
 

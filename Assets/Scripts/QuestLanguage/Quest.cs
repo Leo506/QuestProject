@@ -21,7 +21,7 @@ namespace QuestLanguage
 
         public Quest(string parametrs)
         {
-            List<string> parList = parametrs.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> parList = parametrs.GetWords();
 
             var nameIndex = parList.FindIndex(s => s == "name");
             var descIndex = parList.FindIndex(s => s == "description");

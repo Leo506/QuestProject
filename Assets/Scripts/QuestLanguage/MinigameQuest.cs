@@ -11,7 +11,7 @@ namespace QuestLanguage
         GameObject miniGameObj;
         public MinigameQuest(string parametrs) : base(parametrs)
         {
-            List<string> parList = parametrs.Split(new char[] { ' ' }).ToList();
+            List<string> parList = parametrs.GetWords();
 
             var idIndex = parList.FindIndex(s => s == "id");
             

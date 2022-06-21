@@ -11,7 +11,7 @@ namespace QuestLanguage
     {
         public Spawn(string parametrs)
         {
-            List<string> parList = parametrs.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> parList = parametrs.GetWords();
 
             string typeName = parList[0];
             Type type = Type.GetType("QuestLanguage." + typeName + "Spawner");

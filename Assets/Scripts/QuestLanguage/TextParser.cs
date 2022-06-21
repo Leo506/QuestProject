@@ -25,18 +25,16 @@ namespace QuestLanguage
                 List<string> words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 string type = words[0];
 
-                TextInfo tmp = new CultureInfo("en-US", false).TextInfo;
-
                 if (IsQuestCommand(words[0]))
                 {
-                    type = "QuestLanguage." + tmp.ToTitleCase(type) + "Quest";
+                    type = "QuestLanguage." + type.ToTitleCase() + "Quest";
                     Type t = Type.GetType(type);
 
                     toReturn = Activator.CreateInstance(t, new object[] { line.Remove(0, words[0].Length) });
                 }
                 else
                 {
-                    type = "QuestLanguage." + tmp.ToTitleCase(type);
+                    type = "QuestLanguage." + type.ToTitleCase();
                     Type t = Type.GetType(type);
                     Activator.CreateInstance(t, new object[] { line.Remove(0, words[0].Length) });
                 }
@@ -47,8 +45,7 @@ namespace QuestLanguage
 
         private bool IsQuestCommand(string command)
         {
-            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-            return Type.GetType("QuestLanguage." + textInfo.ToTitleCase(command) + "Quest") != null;
+            return Type.GetType("QuestLanguage." + command.ToTitleCase() + "Quest") != null;
         }
     }
 }

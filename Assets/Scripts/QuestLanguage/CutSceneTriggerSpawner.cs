@@ -10,7 +10,7 @@ namespace QuestLanguage
     {
         public void Spawn(string parametrs, Vector3 pos)
         {
-            List<string> parList = parametrs.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> parList = parametrs.GetWords();
 
             var sceneIndex = parList.FindIndex(s => s == "scene");
 

@@ -13,7 +13,7 @@ namespace QuestLanguage
 
         public GettoQuest(string parametrs) : base(parametrs)
         {
-            List<string> parList = parametrs.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> parList = parametrs.GetWords();
 
             var posIndex = parList.FindIndex(s => s == "pos");
 

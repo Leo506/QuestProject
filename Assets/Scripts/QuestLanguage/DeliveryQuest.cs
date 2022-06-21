@@ -15,7 +15,7 @@ namespace QuestLanguage
         {
             Debug.Log(parametrs);
 
-            List<string> parList = parametrs.Split(new char[] {' '}, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> parList = parametrs.GetWords();
 
             var tmp = parList.FindIndex(s => s == "from");
             fromID = int.Parse(parList[tmp + 1]);
