@@ -13,7 +13,7 @@ public class CheckpointsTests
 
         CheckpointsSystem checkpoints = new CheckpointsSystem(fileManip);
 
-        checkpoints.CreateCheckpoint();
+        checkpoints.CreateCheckpoint(0, Vector3.zero);
 
         Assert.IsTrue(fileManip.FileCreated);
     }
@@ -30,4 +30,23 @@ public class CheckpointsTests
 
         Assert.IsTrue(fileManip.FileLoaded);
     }
+
+    class TestFileManip : IFileManipulator
+    {
+        public bool FileCreated { get; set; }
+        public bool FileLoaded { get; set; }
+
+
+        public void CreateBinnaryFile<T>(T content, string name)
+        {
+            FileCreated = true;
+        }
+
+        public T LoadBinnaryFile<T>(string name)
+        {
+            FileLoaded = true;
+            return default(T);
+        }
+    }
+
 }
