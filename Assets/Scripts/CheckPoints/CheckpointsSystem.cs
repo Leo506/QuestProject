@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-struct Checkpoint
+public struct Checkpoint
 {
     public int questId;
 
@@ -16,6 +16,8 @@ public class CheckpointsSystem
 {
     IFileManipulator fileManip;
 
+    public Checkpoint checkpoint { get; private set; }
+
     public CheckpointsSystem(IFileManipulator manip)
     {
         fileManip = manip;
@@ -23,7 +25,7 @@ public class CheckpointsSystem
 
     public void CreateCheckpoint(int questID, Vector3 playerPos)
     {
-        Checkpoint checkpoint = new Checkpoint()
+        checkpoint = new Checkpoint()
         {
             questId = questID,
             playerX = playerPos.x,
@@ -37,6 +39,6 @@ public class CheckpointsSystem
 
     public void LoadCheckpoint()
     {
-        var checkpoint = fileManip.LoadBinnaryFile<Checkpoint>("Checkpoint.point");
+        checkpoint = fileManip.LoadBinnaryFile<Checkpoint>("Checkpoint.point");
     }
 }
