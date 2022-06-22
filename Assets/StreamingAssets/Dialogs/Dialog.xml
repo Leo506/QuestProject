@@ -73,5 +73,14 @@
       <Answer Text="Понял, уже иду" HasAction="true"/>
     </Phrase>
   </Dialog>
+
+  <Dialog id="5">
+    <Phrase Text="Все, хватит, не могу больше…Ты победил" id="start">
+      <Answer Text="Чей район теперь?" next="1"/>
+    </Phrase>
+    <Phrase Text="Т-твой…твой" id="1">
+      <Answer Text="..." HasAction="true"/>
+    </Phrase>
+  </Dialog>
   
 </Dialogs>

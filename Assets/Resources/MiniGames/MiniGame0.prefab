@@ -121,6 +121,7 @@ MonoBehaviour:
   check: {fileID: 3352809226634198140}
   enemySlider: {fileID: 3352809227310373269}
   playerSlider: {fileID: 3352809226650652692}
+  background: {fileID: 3352809227314959060}
 --- !u!1 &3352809226118650638
 GameObject:
   m_ObjectHideFlags: 0

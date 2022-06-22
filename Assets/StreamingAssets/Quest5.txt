@@ -1,0 +1,1 @@
+chat id 2 autoStart true name Поговорить с хулиганом description Поговори

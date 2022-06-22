@@ -35,6 +35,11 @@ namespace DialogSystem
 
         }
 
+        private void OnDestroy()
+        {
+            DialogButton.ChooseAnswerEvent -= OnAnswerSelected;
+        }
+
         private void OnEnable()
         {
             if (Instance != null)

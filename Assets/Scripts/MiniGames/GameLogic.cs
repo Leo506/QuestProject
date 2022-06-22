@@ -10,6 +10,7 @@ namespace MiniGames.Osu
     {
         [SerializeField] ClickCheck check;
         [SerializeField] Slider enemySlider, playerSlider;
+        [SerializeField] Image background;
 
         public event Action<bool> GameOverEvent;   // true - победа false - поражение
 
@@ -28,12 +29,16 @@ namespace MiniGames.Osu
             enemySlider.gameObject.SetActive(true);
             playerSlider.gameObject.SetActive(true);
 
+            var color = background.color;
+            background.color = new Color(color.r, color.g, color.g, 0.1f);
+
             enemySlider.value -= param;
             playerSlider.value -= 5 - param;
 
             if (enemySlider.value <= 0)
             {
                 GameOverEvent?.Invoke(true);
+                Debug.Log("Game over");
                 return;
             }
 
@@ -51,6 +56,9 @@ namespace MiniGames.Osu
         {
             enemySlider.gameObject.SetActive(false);
             playerSlider.gameObject.SetActive(false);
+
+            var color = background.color;
+            background.color = new Color(color.r, color.g, color.g, 1f);
         }
     }
 }

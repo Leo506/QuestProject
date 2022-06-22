@@ -44,7 +44,20 @@ namespace QuestSystem
             QuestLanguage.Quest quest = parser.CreateQuest() as QuestLanguage.Quest;
 
             currentQuest = quest;
-            currentQuest.Start();
+            
+            if (currentQuest != null)
+                currentQuest.Start();
+        }
+
+        public static void PassQuest()
+        {
+            if (currentQuest != null)
+                currentQuest.Pass();
+            else
+            {
+                currentQuestID++;
+                LoadQuest();
+            }
         }
     }
 }

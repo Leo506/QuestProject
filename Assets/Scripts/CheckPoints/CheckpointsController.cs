@@ -23,6 +23,8 @@ public class CheckpointsController : MonoBehaviour
 
     private void CreateCheckpoint(QuestLanguage.Quest quest)
     {
+        if (playerTransform == null)
+            return;
         checkpointsSystem.CreateCheckpoint(QuestSystem.QuestManager.currentQuestID, playerTransform.position);
     }
 
