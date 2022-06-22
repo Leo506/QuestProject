@@ -11,11 +11,7 @@ namespace DialogSystem
     {
         public static event Action<string> DialogStartEvent;      // Событие начала диалога
         public static event Action<string> DialogEndEvent;        // Событие окончания диалога
-        public static event Action<string> DialogActionEvent;     // Событие, обозначающее, что на данной фразе должно произойти действие
-
-        public event Action<string> DStartEvent;
-        public event Action<string> DEndEvent;
-        public event Action<string> DActionEvent;
+        public static event Action<string> DialogActionEvent;     // Событие, обозначающее, что на данной фразе должно произойти 
 
         public static DialogText Instance;  // Синглтон
 
@@ -49,12 +45,12 @@ namespace DialogSystem
 
         public void InvokeStartDialogEvent()
         {
-            DStartEvent?.Invoke(currentDialogId);
+            DialogStartEvent?.Invoke(currentDialogId);
         }
 
         public void InvokeEndDialogEvent()
         {
-            DEndEvent?.Invoke(currentDialogId);
+            DialogEndEvent?.Invoke(currentDialogId);
         }
 
         public void StartDialog(string id, string path = "/Dialogs/Dialog.xml")
@@ -62,7 +58,6 @@ namespace DialogSystem
             currentDialogId = id;
 
             DialogStartEvent?.Invoke(currentDialogId);  // Сообщаем, что диалог начадся
-            DStartEvent?.Invoke(currentDialogId);
 
             if (dialogCanvas == null)
                 return;
@@ -79,13 +74,11 @@ namespace DialogSystem
             if (item.HasAction)
             {
                 DialogActionEvent?.Invoke(currentDialogId);
-                DActionEvent?.Invoke(currentDialogId);
             }
 
             if (item.Exit)
             {
                 DialogEndEvent?.Invoke(currentDialogId);
-                DEndEvent?.Invoke(currentDialogId);
                 dialogCanvas.enabled = false;
                 return;
             }

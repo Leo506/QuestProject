@@ -38,7 +38,21 @@ namespace Player
             characterController = GetComponent<CharacterController>();
             currentSpeed = Speed;
 
+
+            DialogSystem.DialogText.DialogStartEvent += OnDialogStart;
+            DialogSystem.DialogText.DialogEndEvent += OnDialogEnd;
+
             isInited = true;
+        }
+
+        private void OnDialogEnd(string obj)
+        {
+            StartMove();
+        }
+
+        private void OnDialogStart(string obj)
+        {
+            StopMove();
         }
 
         private void OnDestroy()

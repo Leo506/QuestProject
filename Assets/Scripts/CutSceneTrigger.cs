@@ -45,6 +45,7 @@ public class CutSceneTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            other.GetComponent<Player.PlayerMovement>().StopMove();
             CutSceneStartEvent?.Invoke();
             director.Play();
         }
