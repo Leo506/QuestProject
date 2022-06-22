@@ -14,8 +14,6 @@ namespace Player
 
         private float currentSpeed;
 
-        private IInputController input;
-
         private CharacterController characterController;
 
         private bool isInited = false;
@@ -40,18 +38,11 @@ namespace Player
             characterController = GetComponent<CharacterController>();
             currentSpeed = Speed;
 
-            if (DialogSystem.DialogText.Instance == null)
-                return;
-            DialogSystem.DialogText.Instance.DStartEvent += id => StopMove();
-            DialogSystem.DialogText.Instance.DEndEvent += id => StartMove();
-
             isInited = true;
         }
 
         private void OnDestroy()
         {
-            //DialogSystem.DialogText.DialogStartEvent -= StopMove;
-            //DialogSystem.DialogText.DialogEndEvent -= StartMove;
             CutSceneTrigger.CutSceneStartEvent -= StopMove;
         }
 
@@ -65,24 +56,6 @@ namespace Player
             currentSpeed = 0;
         }
 
-        // Update is called once per frame
-        /*void Update()
-        {
-
-            Vector3 movement = input.GetInputDir();
-            movement *= currentSpeed * Time.deltaTime;
-
-            if (movement == Vector3.zero)
-                return;
-
-            transform.rotation = Quaternion.LookRotation(movement, Vector3.up);
-
-            if (!characterController.isGrounded)
-                movement = new Vector3(movement.x, -10, movement.z);
-
-            characterController.Move(movement);
-        }*/
-
         public void Move(Vector3 direction)
         {
             if (direction == Vector3.zero)
@@ -92,8 +65,9 @@ namespace Player
             if (!characterController.isGrounded)
                 ySpeed = -10;
 
+            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
             var movement = new Vector3(direction.x, ySpeed, direction.z) * currentSpeed * Time.deltaTime;
-            transform.rotation = Quaternion.LookRotation(movement, Vector3.up);
+            
 
             characterController.Move(movement);
         }
