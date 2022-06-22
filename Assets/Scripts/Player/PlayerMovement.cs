@@ -7,75 +7,95 @@ using System;
 
 namespace Player
 {
-    namespace Player
+    [RequireComponent(typeof(CharacterController))]
+    public class PlayerMovement : MonoBehaviour
     {
-        [RequireComponent(typeof(CharacterController))]
-        public class PlayerMovement : MonoBehaviour
+        public float Speed;
+
+        private float currentSpeed;
+
+        private IInputController input;
+
+        private CharacterController characterController;
+
+        private bool isInited = false;
+
+
+        // Start is called before the first frame update
+        void Start()
         {
-            [SerializeField] float speed;
+            InitComponent();
+        }
 
-            private float currentSpeed;
+        private void OnEnable()
+        {
+            if (isInited)
+                return;
 
-            private IInputController input;
+            InitComponent();
+        }
 
-            private CharacterController characterController;
+        private void InitComponent()
+        {
+            characterController = GetComponent<CharacterController>();
+            currentSpeed = Speed;
 
+            if (DialogSystem.DialogText.Instance == null)
+                return;
+            DialogSystem.DialogText.Instance.DStartEvent += id => StopMove();
+            DialogSystem.DialogText.Instance.DEndEvent += id => StartMove();
 
-            // Start is called before the first frame update
-            void Start()
-            {
-                input = InputFactory.Instance.GetInputController();
-                characterController = GetComponent<CharacterController>();
-                DialogSystem.DialogText.DialogStartEvent += StopMove;
-                DialogSystem.DialogText.DialogEndEvent += StartMove;
-                CutSceneTrigger.CutSceneStartEvent += StopMove;
-                currentSpeed = speed;
-            }
+            isInited = true;
+        }
 
-            private void OnDestroy()
-            {
-                DialogSystem.DialogText.DialogStartEvent -= StopMove;
-                DialogSystem.DialogText.DialogEndEvent -= StartMove;
-                CutSceneTrigger.CutSceneStartEvent -= StopMove;
-            }
+        private void OnDestroy()
+        {
+            //DialogSystem.DialogText.DialogStartEvent -= StopMove;
+            //DialogSystem.DialogText.DialogEndEvent -= StartMove;
+            CutSceneTrigger.CutSceneStartEvent -= StopMove;
+        }
 
-            private void StartMove(string id)
-            {
-                currentSpeed = speed;
-            }
+        public void StartMove()
+        {
+            currentSpeed = Speed;
+        }
 
-            private void StartMove()
-            {
-                currentSpeed = speed;
-            }
+        public void StopMove()
+        {
+            currentSpeed = 0;
+        }
 
-            private void StopMove(string id)
-            {
-                currentSpeed = 0;
-            }
+        // Update is called once per frame
+        /*void Update()
+        {
 
-            private void StopMove()
-            {
-                currentSpeed = 0;
-            }
+            Vector3 movement = input.GetInputDir();
+            movement *= currentSpeed * Time.deltaTime;
 
-            // Update is called once per frame
-            void Update()
-            {
+            if (movement == Vector3.zero)
+                return;
 
-                Vector3 movement = input.GetInputDir();
-                movement *= currentSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(movement, Vector3.up);
 
-                if (movement == Vector3.zero)
-                    return;
+            if (!characterController.isGrounded)
+                movement = new Vector3(movement.x, -10, movement.z);
 
-                transform.rotation = Quaternion.LookRotation(movement, Vector3.up);
+            characterController.Move(movement);
+        }*/
 
-                if (!characterController.isGrounded)
-                    movement = new Vector3(movement.x, -10, movement.z);
+        public void Move(Vector3 direction)
+        {
+            if (direction == Vector3.zero)
+                return;
 
-                characterController.Move(movement);
-            }
+            var ySpeed = 0;
+            if (!characterController.isGrounded)
+                ySpeed = -10;
+
+            var movement = new Vector3(direction.x, ySpeed, direction.z) * currentSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(movement, Vector3.up);
+
+            characterController.Move(movement);
         }
     }
 }

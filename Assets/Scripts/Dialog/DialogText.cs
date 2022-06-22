@@ -13,6 +13,10 @@ namespace DialogSystem
         public static event Action<string> DialogEndEvent;        // Событие окончания диалога
         public static event Action<string> DialogActionEvent;     // Событие, обозначающее, что на данной фразе должно произойти действие
 
+        public event Action<string> DStartEvent;
+        public event Action<string> DEndEvent;
+        public event Action<string> DActionEvent;
+
         public static DialogText Instance;  // Синглтон
 
         private string currentDialogId;        // id текущего диалога
@@ -35,11 +39,33 @@ namespace DialogSystem
 
         }
 
+        private void OnEnable()
+        {
+            if (Instance != null)
+                return;
+
+            Instance = this;
+        }
+
+        public void InvokeStartDialogEvent()
+        {
+            DStartEvent?.Invoke(currentDialogId);
+        }
+
+        public void InvokeEndDialogEvent()
+        {
+            DEndEvent?.Invoke(currentDialogId);
+        }
+
         public void StartDialog(string id, string path = "/Dialogs/Dialog.xml")
         {
             currentDialogId = id;
 
             DialogStartEvent?.Invoke(currentDialogId);  // Сообщаем, что диалог начадся
+            DStartEvent?.Invoke(currentDialogId);
+
+            if (dialogCanvas == null)
+                return;
 
             dialogCanvas.enabled = true;
             currentPhrase = XmlToDialog.ReadDialog(Application.streamingAssetsPath+path, id);
@@ -51,11 +77,15 @@ namespace DialogSystem
         private void OnAnswerSelected(Answer item)
         {
             if (item.HasAction)
+            {
                 DialogActionEvent?.Invoke(currentDialogId);
+                DActionEvent?.Invoke(currentDialogId);
+            }
 
             if (item.Exit)
             {
                 DialogEndEvent?.Invoke(currentDialogId);
+                DEndEvent?.Invoke(currentDialogId);
                 dialogCanvas.enabled = false;
                 return;
             }
