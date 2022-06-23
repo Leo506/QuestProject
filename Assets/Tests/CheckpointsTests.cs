@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -40,6 +41,11 @@ public class CheckpointsTests
         public void CreateBinnaryFile<T>(T content, string name)
         {
             FileCreated = true;
+        }
+
+        public void GetTextFileContent(string name, Action<string> methodOnLoad)
+        {
+            throw new NotImplementedException();
         }
 
         public T LoadBinnaryFile<T>(string name)
