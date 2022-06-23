@@ -9,9 +9,9 @@ namespace DialogSystem
 {
     public class DialogText : MonoBehaviour
     {
-        public static event Action<string> DialogStartEvent;      // Событие начала диалога
-        public static event Action<string> DialogEndEvent;        // Событие окончания диалога
-        public static event Action<string> DialogActionEvent;     // Событие, обозначающее, что на данной фразе должно произойти 
+        public static event Action<string> DialogStartEvent;              // Событие начала диалога
+        public static event Action<string> DialogEndEvent;                // Событие окончания диалога
+        public static event Action<string, string> DialogActionEvent;     // Событие, обозначающее, что на данной фразе должно произойти 
 
         public static DialogText Instance;  // Синглтон
 
@@ -78,7 +78,7 @@ namespace DialogSystem
         {
             if (item.HasAction)
             {
-                DialogActionEvent?.Invoke(currentDialogId);
+                DialogActionEvent?.Invoke(currentDialogId, item.Action);
             }
 
             if (item.Exit)

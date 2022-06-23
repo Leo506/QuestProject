@@ -32,9 +32,9 @@ namespace QuestLanguage
             DialogSystem.DialogText.DialogActionEvent += GotQuest;    // Условие получения квеста
         }
 
-        private void GotQuest(string id)
+        private void GotQuest(string id, string action)
         {
-            if (id == QuestSystem.QuestManager.currentQuestID.ToString())
+            if (action == "GotQuest")
                 Got();
         }
 

@@ -16,8 +16,11 @@ namespace Components
             DialogSystem.DialogText.DialogActionEvent += GotMail;
         }
 
-        private void GotMail(string id)
+        private void GotMail(string id, string action)
         {
+            if (action != "PassQuest")
+                return;
+
             TargetGotMailEvent?.Invoke();
             Destroy(this);
         }

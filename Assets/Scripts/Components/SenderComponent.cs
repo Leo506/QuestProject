@@ -13,20 +13,17 @@ namespace Components
             DialogSystem.DialogText.DialogActionEvent += OnDialogEnd;
         }
 
-        private void OnDialogEnd(string id)
+        private void OnDialogEnd(string id, string action)
         {
-            Debug.Log("OnDialogEnd Sender");
+            if (action != "GotQuest")
+                return;
+
             Destroy(this);
         }
 
         public void Use()
         {
             DialogSystem.DialogText.Instance.StartDialog(QuestSystem.QuestManager.currentQuestID.ToString());
-        }
-
-        private void OnDestroy()
-        {
-            DialogSystem.DialogText.DialogEndEvent -= OnDialogEnd;
         }
     }
 }

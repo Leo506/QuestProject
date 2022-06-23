@@ -16,12 +16,15 @@ namespace DialogSystem
 
         public bool HasAction { get; set; }
 
+        public string Action { get; set; }
+
         public Answer()
         {
             Text = "";
             Next = null;
             Exit = false;
             HasAction = false;
+            Action = "";
         }
     }
 }

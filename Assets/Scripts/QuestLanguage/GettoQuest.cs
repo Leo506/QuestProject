@@ -31,17 +31,17 @@ namespace QuestLanguage
             DialogSystem.DialogText.DialogActionEvent += GotQuest;
         }
 
-        private void GotQuest(string id)
+        private void GotQuest(string id, string action)
         {
-            Debug.Log("Getto quest: " + id + " expected: " + QuestSystem.QuestManager.currentQuestID);
-            if (id == QuestSystem.QuestManager.currentQuestID.ToString())
+
+            if (action == "GotQuest")
             {
                 Got();
                 TriggerBuilder.Instance.CreateTrigger(triggerPos);
             }
         }
 
-        ~GettoQuest()
+        public override void Destroy()
         {
             Trigger.OnTriggerEnterEvent -= Pass;
             DialogSystem.DialogText.DialogActionEvent -= GotQuest;

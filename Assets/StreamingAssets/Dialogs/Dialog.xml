@@ -7,13 +7,13 @@
     </Phrase>
   
     <Phrase Text="Some text 2" id="1">
-      <Answer Text="Answer 3" exit="true" HasAction="true"/>
+      <Answer Text="Answer 3" exit="true" HasAction="true" Action="GotQuest"/>
     </Phrase>
   </Dialog>
 
   <Dialog id="-1">
     <Phrase Text="О, вот так спасибо, так спасибо. А то я тут совсем оголодал. Ноги мои уже почти не ходят. Дааа…недолго мне осталось вас обременять, уйду скоро уж на тот свет" id="start">
-      <Answer Text="ты же здесь давно живешь?" next="1" HasAction="true"/>
+      <Answer Text="ты же здесь давно живешь?" next="1" HasAction="true" Action="PassQuest"/>
     </Phrase>
     <Phrase Text="Ну да, давненько. Дольше, чем хотелось бы" id="1">
       <Answer Text="И мою маму знаешь давно?" next="2"/>
@@ -31,7 +31,7 @@
       <Answer Text="Достаточно, но…" next="6"/>
     </Phrase>
     <Phrase Text="Ну и не нокай. Иди давай домой, да по сторонам гляди в оба." id="6">
-      <Answer Text="..." HasAction="true"/>
+      <Answer Text="..." HasAction="true" Action="GotQuest"/>
     </Phrase>
   </Dialog>
 
@@ -64,13 +64,13 @@
       <Answer Text="Я не твой сын!!!" next="9"/>
     </Phrase>
     <Phrase Text="Не говори такого! Ты теперь мой сын!" id="9">
-      <Answer Text="..." HasAction="true"/>
+      <Answer Text="..." HasAction="true" Action="PassQuest"/>
     </Phrase>
   </Dialog>
 
   <Dialog id="3">
     <Phrase Text="Привет еще раз. Короче, иди туда то" id="start">
-      <Answer Text="Понял, уже иду" HasAction="true"/>
+      <Answer Text="Понял, уже иду" HasAction="true" Action="GotQuest"/>
     </Phrase>
   </Dialog>
 
@@ -79,7 +79,7 @@
       <Answer Text="Чей район теперь?" next="1"/>
     </Phrase>
     <Phrase Text="Т-твой…твой" id="1">
-      <Answer Text="..." HasAction="true"/>
+      <Answer Text="..." HasAction="true" Action="PassQuest"/>
     </Phrase>
   </Dialog>
   

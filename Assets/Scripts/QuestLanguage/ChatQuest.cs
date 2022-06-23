@@ -23,21 +23,24 @@ namespace QuestLanguage
             bool autoStart = bool.Parse(parList[playIndex + 1]);
 
             if (autoStart)
-                GotQuest("");
+                GotQuest("", "GotQuest");
             else
                 DialogSystem.DialogText.DialogActionEvent += GotQuest;
 
             
         }
 
-        private void PassQuest(string id)
+        private void PassQuest(string id, string action)
         {
-            if (id == QuestSystem.QuestManager.currentQuestID.ToString())
+            if (action == "PassQuest")
                 Pass();
         }
 
-        private void GotQuest(string id)
+        private void GotQuest(string id, string action)
         {
+            if (action != "GotQuest")
+                return;
+
             Got();
             NPCManagement.NPCManager.GetNPC(npcID).gameObject.AddComponent<Components.SenderComponent>();
 

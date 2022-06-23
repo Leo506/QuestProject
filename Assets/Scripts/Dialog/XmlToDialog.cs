@@ -71,7 +71,10 @@ namespace DialogSystem
                 }
 
                 if (answer.Attribute("HasAction") != null)
+                {
                     answer1.HasAction = bool.Parse(answer.Attribute("HasAction").Value);
+                    answer1.Action = answer.Attribute("Action").Value;
+                }
 
                 phrase.answers.Add(answer1);
             }

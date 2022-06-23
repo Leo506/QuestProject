@@ -14,7 +14,7 @@
       <Answer Text="Это неправда! Никакой я не подкидыш!!!" next="4"/>
     </Phrase>
     <Phrase Text="Ахаха, пойдемте, парни, нечего зря время терять на этого подкидыша, который даже собственной матери не нужен. Ахахах" id="4">
-      <Answer Text="..." HasAction="true"/>
+      <Answer Text="..." HasAction="true" Action=""/>
     </Phrase>
   </Dialog>
 </Dialogs>
