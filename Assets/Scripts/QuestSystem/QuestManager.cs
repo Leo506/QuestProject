@@ -59,5 +59,12 @@ namespace QuestSystem
                 LoadQuest();
             }
         }
+
+        public static void LoadQuest(int id)
+        {
+            currentQuestID = id;
+
+            LoadQuest();
+        }
     }
 }

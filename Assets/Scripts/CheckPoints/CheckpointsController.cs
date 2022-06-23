@@ -22,6 +22,12 @@ public class CheckpointsController : MonoBehaviour
         QuestLanguage.Quest.QuestGotEvent += CreateCheckpoint;
     }
 
+    private void OnDestroy()
+    {
+        Player.PlayerLogic.PlayerDiedEvent -= LoadCheckpoint;
+        QuestLanguage.Quest.QuestGotEvent -= CreateCheckpoint;
+    }
+
     private void CreateCheckpoint(QuestLanguage.Quest quest)
     {
         if (playerTransform == null)
@@ -30,14 +36,13 @@ public class CheckpointsController : MonoBehaviour
     }
 
 
-    private void LoadCheckpoint()
+    public void LoadCheckpoint()
     {
         Debug.Log("Load checkpoint");
         checkpointsSystem.LoadCheckpoint();
 
-        if (SceneManager.GetActiveScene().name != checkpointsSystem.checkpoint.sceneName)
-            SceneManager.LoadScene(checkpointsSystem.checkpoint.sceneName);
+        SceneManager.LoadScene(CheckpointsSystem.checkpoint.sceneName);
 
-        CheckpointLoadedEvent?.Invoke(checkpointsSystem.checkpoint);
+        CheckpointLoadedEvent?.Invoke(CheckpointsSystem.checkpoint);
     }
 }

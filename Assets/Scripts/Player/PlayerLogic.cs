@@ -21,15 +21,26 @@ namespace Player
         private void OnCheckpointLoaded(Checkpoint obj)
         {
             var pos = new Vector3(obj.playerX, obj.playerY, obj.playerZ);
-            GetComponent<Player.PlayerMovement>().enabled = false;
+            var movement = GetComponent<Player.PlayerMovement>();
+            
+            if (movement != null)
+                movement.enabled = false;
             this.transform.localPosition = pos;
             Invoke("EnableMovement", 2);
+        }
+
+        private void OnDestroy()
+        {
+            CheckpointsController.CheckpointLoadedEvent -= OnCheckpointLoaded;
         }
 
 
         private void EnableMovement()
         {
-            GetComponent<Player.PlayerMovement>().enabled = true;
+            var movement = GetComponent<Player.PlayerMovement>();
+
+            if (movement != null)
+                movement.enabled = true;
         }
 
         private void OnUse()

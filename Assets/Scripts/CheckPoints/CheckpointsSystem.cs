@@ -19,7 +19,7 @@ public class CheckpointsSystem
 {
     IFileManipulator fileManip;
 
-    public Checkpoint checkpoint { get; private set; }
+    public static Checkpoint checkpoint { get; private set; }
 
     public CheckpointsSystem(IFileManipulator manip)
     {

@@ -12,7 +12,7 @@ namespace BullyFight
         // Start is called before the first frame update
         void Start()
         {
-            QuestSystem.QuestManager.PassQuest();
+            QuestSystem.QuestManager.LoadQuest(4);
             FindObjectsOfType<MonoBehaviour>().OfType<MiniGames.IMiniGame>().First().GameOverEvent += win => { if (win) DialogSystem.DialogText.Instance.StartDialog(QuestSystem.QuestManager.currentQuestID.ToString()); };
         }
     }
