@@ -13,7 +13,7 @@ public class CheckpointsTests
 
         CheckpointsSystem checkpoints = new CheckpointsSystem(fileManip);
 
-        checkpoints.CreateCheckpoint(0, Vector3.zero);
+        checkpoints.CreateCheckpoint(0, Vector3.zero, "scene");
 
         Assert.IsTrue(fileManip.FileCreated);
     }

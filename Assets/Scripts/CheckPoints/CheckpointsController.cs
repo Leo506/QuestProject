@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckpointsController : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class CheckpointsController : MonoBehaviour
     {
         if (playerTransform == null)
             return;
-        checkpointsSystem.CreateCheckpoint(QuestSystem.QuestManager.currentQuestID, playerTransform.position);
+        checkpointsSystem.CreateCheckpoint(QuestSystem.QuestManager.currentQuestID, playerTransform.position, SceneManager.GetActiveScene().name);
     }
 
 
@@ -33,11 +34,10 @@ public class CheckpointsController : MonoBehaviour
     {
         Debug.Log("Load checkpoint");
         checkpointsSystem.LoadCheckpoint();
+
+        if (SceneManager.GetActiveScene().name != checkpointsSystem.checkpoint.sceneName)
+            SceneManager.LoadScene(checkpointsSystem.checkpoint.sceneName);
+
         CheckpointLoadedEvent?.Invoke(checkpointsSystem.checkpoint);
-        /*var tmp = checkpointsSystem.checkpoint;
-        Vector3 pos = new Vector3(tmp.playerX, tmp.playerY, tmp.playerZ);
-        Debug.Log("Checkpoints pos: " + pos);
-        FindObjectOfType<Player.PlayerLogic>().transform.SetPositionAndRotation(pos, Quaternion.identity);
-        */
     }
 }

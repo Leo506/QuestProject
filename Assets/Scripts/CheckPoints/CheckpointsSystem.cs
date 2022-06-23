@@ -11,6 +11,8 @@ public struct Checkpoint
     public float playerX;
     public float playerY;
     public float playerZ;
+
+    public string sceneName;
 }
 
 public class CheckpointsSystem
@@ -24,14 +26,15 @@ public class CheckpointsSystem
         fileManip = manip;
     }
 
-    public void CreateCheckpoint(int questID, Vector3 playerPos)
+    public void CreateCheckpoint(int questID, Vector3 playerPos, string sceneName)
     {
         checkpoint = new Checkpoint()
         {
             questId = questID,
             playerX = playerPos.x,
             playerY = playerPos.y,
-            playerZ = playerPos.z
+            playerZ = playerPos.z,
+            sceneName = sceneName
         };
 
         fileManip.CreateBinnaryFile<Checkpoint>(checkpoint, "Checkpoint.point");
