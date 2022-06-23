@@ -7,19 +7,24 @@ public class CheckpointsController : MonoBehaviour
 {
     CheckpointsSystem checkpointsSystem;
 
-    Transform playerTransform;
-
     public static event System.Action<Checkpoint> CheckpointLoadedEvent;
+
+    public static CheckpointsController Instance;
 
     // Start is called before the first frame update
     void Start()
     {
-        checkpointsSystem = new CheckpointsSystem(new FileManipulator());
+        if (Instance != this)
+            Destroy(this.gameObject);
 
-        playerTransform = FindObjectOfType<Player.PlayerLogic>().transform;
+        Instance = this;
+
+        checkpointsSystem = new CheckpointsSystem(new FileManipulator());
 
         Player.PlayerLogic.PlayerDiedEvent += LoadCheckpoint;
         QuestLanguage.Quest.QuestGotEvent += CreateCheckpoint;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnDestroy()
@@ -30,6 +35,7 @@ public class CheckpointsController : MonoBehaviour
 
     private void CreateCheckpoint(QuestLanguage.Quest quest)
     {
+        var playerTransform = FindObjectOfType<Player.PlayerLogic>().transform;
         if (playerTransform == null)
             return;
         checkpointsSystem.CreateCheckpoint(QuestSystem.QuestManager.currentQuestID, playerTransform.position, SceneManager.GetActiveScene().name);
