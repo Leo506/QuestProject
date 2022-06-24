@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using InputSystem;
 using System.Linq;
 using System;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -18,6 +18,7 @@ namespace Player
 
         private bool isInited = false;
 
+        private PlayerInput playerInput;
 
         // Start is called before the first frame update
         void Start()
@@ -38,6 +39,8 @@ namespace Player
             characterController = GetComponent<CharacterController>();
             currentSpeed = Speed;
 
+            playerInput = new PlayerInput();
+            playerInput.Player.Enable();
 
             DialogSystem.DialogText.DialogStartEvent += OnDialogStart;
             DialogSystem.DialogText.DialogEndEvent += OnDialogEnd;
@@ -68,6 +71,12 @@ namespace Player
         public void StopMove()
         {
             currentSpeed = 0;
+        }
+
+        private void Update()
+        {
+            Vector2 inputVector = playerInput.Player.Movement.ReadValue<Vector2>();
+            Move(new Vector3(inputVector.x, 0, inputVector.y));
         }
 
         public void Move(Vector3 direction)

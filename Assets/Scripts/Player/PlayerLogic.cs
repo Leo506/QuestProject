@@ -13,8 +13,6 @@ namespace Player
 
         private void Start()
         {
-            var input = InputSystem.InputFactory.Instance.GetInputController();
-            input.UseKeyDown += OnUse;
             CheckpointsController.CheckpointLoadedEvent += OnCheckpointLoaded;
         }
 
