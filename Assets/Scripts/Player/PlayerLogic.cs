@@ -1,63 +1,49 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerLogic : MonoBehaviour
     {
-        IUsable currentUsableObj;
+        public static event Action PlayerDiedEvent;
 
-        public static event System.Action PlayerDiedEvent;
+        IUsable currentUsableObj;
+        bool isInited = false;
 
         private void Start()
         {
-            CheckpointsController.CheckpointLoadedEvent += OnCheckpointLoaded;
-        }
-
-        private void OnCheckpointLoaded(Checkpoint obj)
-        {
-            var pos = new Vector3(obj.playerX, obj.playerY, obj.playerZ);
-            var movement = GetComponent<Player.PlayerMovement>();
-            
-            if (movement != null)
-                movement.enabled = false;
-            this.transform.localPosition = pos;
-            Invoke("EnableMovement", 2);
-        }
-
-        private void OnDestroy()
-        {
-            CheckpointsController.CheckpointLoadedEvent -= OnCheckpointLoaded;
+            Init();
         }
 
 
-        private void EnableMovement()
+        private void OnEnable()
         {
-            var movement = GetComponent<Player.PlayerMovement>();
-
-            if (movement != null)
-                movement.enabled = true;
+            if (isInited)
+                return;
+            Init();
         }
 
-        private void OnUse()
+        private void Init()
         {
-            Debug.Log("Using... (from player logic)");
-            currentUsableObj?.Use();
+            var playerInput = new PlayerInput();
+            playerInput.Player.Enable();
+            playerInput.Player.Using.performed += context => UseObj();
+
+            isInited = true;
         }
 
-        private void OnTriggerEnter(Collider collider)
+
+        public void SetUsableObj(IUsable obj)
         {
-            IUsable obj = collider.gameObject.GetComponent<IUsable>();
-            Debug.Log("Collision with usable obj? " + (obj != null));
-            if (obj != null)
-                currentUsableObj = obj;
+            currentUsableObj = obj;
         }
 
-        private void OnTriggerExit(Collider collider)
+
+        public void UseObj()
         {
-            currentUsableObj = null;
+            if (currentUsableObj == null)
+                return;
+            currentUsableObj.Use();
         }
 
         public void Die()
