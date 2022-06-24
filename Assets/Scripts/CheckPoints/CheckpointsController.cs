@@ -45,7 +45,7 @@ public class CheckpointsController : MonoBehaviour
     public void LoadCheckpoint()
     {
         Debug.Log("Load checkpoint");
-        checkpointsSystem.LoadCheckpoint();
+        checkpointsSystem.Load();
 
         SceneManager.LoadScene(CheckpointsSystem.checkpoint.sceneName);
 
