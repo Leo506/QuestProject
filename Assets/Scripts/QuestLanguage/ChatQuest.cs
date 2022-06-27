@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using Components;
 
 
 namespace QuestLanguage
 {
     public class ChatQuest : Quest
     {
-        int npcID;
+        private int npcID;
+        private StartDialogComponent dialogComponent;
+
         public ChatQuest(string parametr) : base(parametr)
         {
             List<string> parList = parametr.GetWords();
@@ -33,7 +35,10 @@ namespace QuestLanguage
         private void PassQuest(string id, string action)
         {
             if (action == "PassQuest")
+            {
+                GameObject.Destroy(dialogComponent);
                 Pass();
+            }
         }
 
         private void GotQuest(string id, string action)
@@ -42,7 +47,8 @@ namespace QuestLanguage
                 return;
 
             Got();
-            NPCManagement.NPCManager.GetNPC(npcID).gameObject.AddComponent<Components.SenderComponent>();
+            dialogComponent = NPCManagement.NPCManager.GetNPC(npcID).gameObject.AddComponent<StartDialogComponent>();
+            dialogComponent.SetDialogID(QuestSystem.QuestManager.currentQuestID.ToString());
 
             DialogSystem.DialogText.DialogActionEvent -= GotQuest;
 

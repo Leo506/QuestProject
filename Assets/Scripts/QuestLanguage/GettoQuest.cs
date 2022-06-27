@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Components;
 
 
 namespace QuestLanguage
 {
     public class GettoQuest : Quest
     {
-        Vector3 triggerPos;
-        int fromID;
+        private Vector3 triggerPos;
+        private int fromID;
+
+        private StartDialogComponent dialogComponent;
 
         public GettoQuest(string parametrs) : base(parametrs)
         {
@@ -26,7 +29,8 @@ namespace QuestLanguage
 
             Trigger.OnTriggerEnterEvent += Pass;
 
-            NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<Components.SenderComponent>();
+            dialogComponent = NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<StartDialogComponent>();
+            dialogComponent.SetDialogID(QuestSystem.QuestManager.currentQuestID.ToString());
 
             DialogSystem.DialogText.DialogActionEvent += GotQuest;
         }
@@ -38,6 +42,7 @@ namespace QuestLanguage
             {
                 Got();
                 TriggerBuilder.Instance.CreateTrigger(triggerPos);
+                GameObject.Destroy(dialogComponent.gameObject);
             }
         }
 
