@@ -7,7 +7,7 @@ namespace NPCManagement
 {
     public class NPCManager
     {
-        static List<NPC> npcList = new List<NPC>();
+        static HashSet<NPC> npcList = new HashSet<NPC>();
 
         public static void RegistrateNPC(NPC npc)
         {
@@ -21,7 +21,12 @@ namespace NPCManagement
 
         public static NPC GetNPC(int id)
         {
-            return npcList.Where(n => n.npcID == id).First();
+            return npcList.Where(n => n.npcID == id).FirstOrDefault();
+        }
+
+        public static void Clear()
+        {
+            npcList.Clear();
         }
     }
 }

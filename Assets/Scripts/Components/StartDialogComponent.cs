@@ -9,6 +9,7 @@ namespace Components
         private string dialogID;
 
         public void SetDialogID(string id) => dialogID = id;
+        public string GetDialogID() => dialogID;
 
         public void Use()
         {

@@ -27,12 +27,14 @@ namespace QuestLanguage
             tmp = parList.FindIndex(s => s == "to");
             toID = int.Parse(parList[tmp + 1]);
 
+            var dialogsIndex = parList.FindIndex(s => s == "dialogs");
+
 
             sender = NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<StartDialogComponent>();
-            sender.SetDialogID(QuestSystem.QuestManager.currentQuestID.ToString());
+            sender.SetDialogID(parList[dialogsIndex + 1]);
 
             target = NPCManagement.NPCManager.GetNPC(toID).gameObject.AddComponent<StartDialogComponent>();
-            target.SetDialogID((-QuestSystem.QuestManager.currentQuestID).ToString());
+            target.SetDialogID(parList[dialogsIndex + 2]);
 
             DialogSystem.DialogText.DialogActionEvent += GotQuest;    // Условие получения квеста
         }
@@ -40,27 +42,33 @@ namespace QuestLanguage
         private void GotQuest(string id, string action)
         {
             if (action == "GotQuest")
-            {
                 Got();
-                GameObject.Destroy(sender);
-                DialogSystem.DialogText.DialogActionEvent -= GotQuest;
-                DialogSystem.DialogText.DialogActionEvent += PassQuest;
-            }
         }
 
         private void PassQuest(string id, string action)
         {
             if (action != "PassQuest")
                 return;
-
-            GameObject.Destroy(target);
-
             Pass();
         }
 
         public override void Destroy()
         {
             DialogSystem.DialogText.DialogActionEvent -= GotQuest;
+        }
+
+        public override void Got()
+        {
+            base.Got();
+            GameObject.Destroy(sender);
+            DialogSystem.DialogText.DialogActionEvent -= GotQuest;
+            DialogSystem.DialogText.DialogActionEvent += PassQuest;
+        }
+
+        public override void Pass()
+        {
+            base.Pass();
+            GameObject.Destroy(target);
         }
     }
 }

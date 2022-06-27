@@ -44,6 +44,7 @@ namespace Player
             if (currentUsableObj == null)
                 return;
             currentUsableObj.Use();
+            currentUsableObj = null;
         }
 
         public void Die()

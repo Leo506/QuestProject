@@ -29,7 +29,7 @@ namespace QuestLanguage
         public void OnPass(bool win)
         {
             if (!win)
-               CheckpointsController.Instance.LoadCheckpoint(); // TODO возврат на последний checkpoint
+               CheckpointsSystem.LoadCheckpoint();
 
             GameObject.Destroy(miniGameObj);
             Pass();

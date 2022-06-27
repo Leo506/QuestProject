@@ -14,8 +14,8 @@ namespace QuestLanguage
         public string QuestName { get; protected set; }
         public string QuestDescription { get; protected set; }
 
-        public void Pass() => QuestPassedEvent?.Invoke(this);
-        public void Got() => QuestGotEvent?.Invoke(this);
+        public virtual void Pass() => QuestPassedEvent?.Invoke(this);
+        public virtual void Got() => QuestGotEvent?.Invoke(this);
         public virtual void Start() { }
         public virtual void Destroy() { }
 
