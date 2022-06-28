@@ -11,6 +11,7 @@ namespace QuestLanguage
     {
         private int npcID;
         private StartDialogComponent dialogComponent;
+        private string dialogID;
 
         public ChatQuest(string parametr) : base(parametr)
         {
@@ -24,8 +25,12 @@ namespace QuestLanguage
 
             bool autoStart = bool.Parse(parList[playIndex + 1]);
 
+            var dialogIDIndex = parList.IndexOf("dialog");
+
+            dialogID = parList[dialogIDIndex + 1];
+
             if (autoStart)
-                GotQuest("", "GotQuest");
+                Got();
             else
                 DialogSystem.DialogText.DialogActionEvent += GotQuest;
 
@@ -35,10 +40,7 @@ namespace QuestLanguage
         private void PassQuest(string id, string action)
         {
             if (action == "PassQuest")
-            {
-                GameObject.Destroy(dialogComponent);
                 Pass();
-            }
         }
 
         private void GotQuest(string id, string action)
@@ -47,17 +49,28 @@ namespace QuestLanguage
                 return;
 
             Got();
+        }
+
+        public override void Destroy()
+        {
+            DialogSystem.DialogText.DialogActionEvent -= PassQuest;
+        }
+
+        public override void Got()
+        {
+            base.Got();
             dialogComponent = NPCManagement.NPCManager.GetNPC(npcID).gameObject.AddComponent<StartDialogComponent>();
-            dialogComponent.SetDialogID(QuestSystem.QuestManager.currentQuestID.ToString());
+            dialogComponent.SetDialogID(dialogID);
 
             DialogSystem.DialogText.DialogActionEvent -= GotQuest;
 
             DialogSystem.DialogText.DialogActionEvent += PassQuest;
         }
 
-        public override void Destroy()
+        public override void Pass()
         {
-            DialogSystem.DialogText.DialogActionEvent -= PassQuest;
+            GameObject.Destroy(dialogComponent);
+            base.Pass();
         }
     }
 }

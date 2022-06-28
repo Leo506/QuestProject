@@ -1,1 +1,1 @@
-chat id 0 autoStart false name Вернуться к маме description Еда передана. Теперь пора вернуться домой
+chat id 0 autoStart false dialog 2 name Вернуться к маме description Еда передана. Теперь пора вернуться домой
