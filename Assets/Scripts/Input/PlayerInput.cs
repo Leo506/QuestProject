@@ -104,6 +104,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1f6fe184-0ce9-485f-8f47-c902dcc9cf52"",
+                    ""path"": ""<AndroidJoystick>/stick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Android"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""28448278-37d4-45af-8460-42cb4bfa2b9f"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -123,6 +134,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Android"",
+            ""bindingGroup"": ""Android"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<AndroidJoystick>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -237,6 +259,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         {
             if (m_KeyboardPCSchemeIndex == -1) m_KeyboardPCSchemeIndex = asset.FindControlSchemeIndex("Keyboard (PC)");
             return asset.controlSchemes[m_KeyboardPCSchemeIndex];
+        }
+    }
+    private int m_AndroidSchemeIndex = -1;
+    public InputControlScheme AndroidScheme
+    {
+        get
+        {
+            if (m_AndroidSchemeIndex == -1) m_AndroidSchemeIndex = asset.FindControlSchemeIndex("Android");
+            return asset.controlSchemes[m_AndroidSchemeIndex];
         }
     }
     public interface IPlayerActions
