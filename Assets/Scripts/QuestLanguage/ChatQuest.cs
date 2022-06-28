@@ -15,19 +15,12 @@ namespace QuestLanguage
 
         public ChatQuest(string parametr) : base(parametr)
         {
-            List<string> parList = parametr.GetWords();
 
-            var idIndex = parList.IndexOf("id");
+            ParsingUtility utility = new ParsingUtility(parametr);
 
-            npcID = int.Parse(parList[idIndex + 1]);
-
-            var playIndex = parList.IndexOf("autoStart");
-
-            bool autoStart = bool.Parse(parList[playIndex + 1]);
-
-            var dialogIDIndex = parList.IndexOf("dialog");
-
-            dialogID = parList[dialogIDIndex + 1];
+            npcID = utility.GetValue<int>("id");
+            bool autoStart = utility.GetValue<bool>("autoStart");
+            dialogID = utility.GetValue<string>("dialog");
 
             if (autoStart)
                 Got();

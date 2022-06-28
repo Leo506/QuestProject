@@ -40,4 +40,19 @@ public class ParsingUtilityTest
 
         Assert.IsTrue(processed);
     }
+
+
+    [Test]
+    public void GetSomeValuesFromStringSuccess()
+    {
+        string str = "id 0 1 2";
+
+        ParsingUtility utility = new ParsingUtility(str);
+
+        var result = utility.GetValues<int>("id", 3);
+
+        var expected = new int[] { 0, 1, 2 };
+
+        Assert.AreEqual(expected, result);
+    }
 }

@@ -17,24 +17,19 @@ namespace QuestLanguage
 
         public DeliveryQuest(string parametrs) : base(parametrs)
         {
-            Debug.Log(parametrs);
+            ParsingUtility utility = new ParsingUtility(parametrs);
 
-            List<string> parList = parametrs.GetWords();
+            fromID = utility.GetValue<int>("from");
+            toID = utility.GetValue<int>("to");
 
-            var tmp = parList.FindIndex(s => s == "from");
-            fromID = int.Parse(parList[tmp + 1]);
-
-            tmp = parList.FindIndex(s => s == "to");
-            toID = int.Parse(parList[tmp + 1]);
-
-            var dialogsIndex = parList.FindIndex(s => s == "dialogs");
+            var dialogIDs = utility.GetValues<string>("dialogs", 2);
 
 
             sender = NPCManagement.NPCManager.GetNPC(fromID).gameObject.AddComponent<StartDialogComponent>();
-            sender.SetDialogID(parList[dialogsIndex + 1]);
+            sender.SetDialogID(dialogIDs[0]);
 
             target = NPCManagement.NPCManager.GetNPC(toID).gameObject.AddComponent<StartDialogComponent>();
-            target.SetDialogID(parList[dialogsIndex + 2]);
+            target.SetDialogID(dialogIDs[1]);
 
             DialogSystem.DialogText.DialogActionEvent += GotQuest;    // Условие получения квеста
         }
