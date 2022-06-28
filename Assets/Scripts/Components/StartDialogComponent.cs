@@ -24,5 +24,15 @@ namespace Components
             Player.PlayerLogic player = other.gameObject.GetComponent<Player.PlayerLogic>();
             player.SetUsableObj(this);
         }
+
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.tag != "Player")
+                return;
+
+            Player.PlayerLogic player = other.gameObject.GetComponent<Player.PlayerLogic>();
+            player.UnsetUsableObj();
+        }
     }
 }

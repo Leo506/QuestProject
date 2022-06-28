@@ -6,6 +6,8 @@ namespace Player
     public class PlayerLogic : MonoBehaviour
     {
         public static event Action PlayerDiedEvent;
+        public static event Action OnSetUsableObj;
+        public static event Action OnUnsetUsableObj;
 
         IUsable currentUsableObj;
         bool isInited = false;
@@ -36,6 +38,13 @@ namespace Player
         public void SetUsableObj(IUsable obj)
         {
             currentUsableObj = obj;
+            OnSetUsableObj?.Invoke();
+        }
+
+        public void UnsetUsableObj()
+        {
+            currentUsableObj = null;
+            OnUnsetUsableObj?.Invoke();
         }
 
 
@@ -45,6 +54,7 @@ namespace Player
                 return;
             currentUsableObj.Use();
             currentUsableObj = null;
+            OnUnsetUsableObj?.Invoke();
         }
 
         public void Die()

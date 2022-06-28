@@ -52,6 +52,53 @@ public class PlayerLogicTests : InputTestFixture
         Assert.IsTrue(testUse.Used);
     }
 
+
+    [Test]
+    public void SetUsableObjEventInvokeSuccess()
+    {
+        var player = new GameObject().AddComponent<PlayerLogic>();
+        var testUse = new GameObject().AddComponent<TestUsableClass>();
+
+        bool processed = false;
+        PlayerLogic.OnSetUsableObj += () => processed = true;
+
+        player.SetUsableObj(testUse);
+
+        Assert.IsTrue(processed);
+    }
+
+
+    [Test]
+    public void UnsetUsableObjetEventInvokeSuccess()
+    {
+        var player = new GameObject().AddComponent<PlayerLogic>();
+        var testUse = new GameObject().AddComponent<TestUsableClass>();
+
+        bool processed = false;
+        PlayerLogic.OnUnsetUsableObj += () => processed = true;
+
+        player.SetUsableObj(testUse);
+        player.UseObj();
+
+        Assert.IsTrue(processed);
+    }
+
+
+    [Test]
+    public void UnsetUsableObjectSuccess()
+    {
+        var player = new GameObject().AddComponent<PlayerLogic>();
+        var testUse = new GameObject().AddComponent<TestUsableClass>();
+
+        player.SetUsableObj(testUse);
+        player.UnsetUsableObj();
+
+        player.UseObj();
+
+        Assert.IsFalse(testUse.Used);
+        
+    }
+
     private void OnPlayerDie()
     {
         Assert.IsTrue(true);
@@ -60,7 +107,7 @@ public class PlayerLogicTests : InputTestFixture
 
     class TestUsableClass : MonoBehaviour, IUsable
     {
-        public bool Used;
+        public bool Used = false;
         public void Use()
         {
             Used = true;
