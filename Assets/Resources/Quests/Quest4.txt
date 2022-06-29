@@ -1,0 +1,1 @@
+minigame id 0 name Победи хулигана description Победи

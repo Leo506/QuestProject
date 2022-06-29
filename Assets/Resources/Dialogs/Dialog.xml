@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dialogs>
+  <Dialog id="1">
+    <Phrase Text="Some text" id="start">
+      <Answer Text="Answer 1" next="1"/>
+      <Answer Text="Answer 2" exit="true"/>
+    </Phrase>
+  
+    <Phrase Text="Some text 2" id="1">
+      <Answer Text="Answer 3" exit="true" HasAction="true" Action="GotQuest"/>
+    </Phrase>
+  </Dialog>
+
+  <Dialog id="-1">
+    <Phrase Text="О, вот так спасибо, так спасибо. А то я тут совсем оголодал. Ноги мои уже почти не ходят. Дааа…недолго мне осталось вас обременять, уйду скоро уж на тот свет" id="start">
+      <Answer Text="ты же здесь давно живешь?" next="1" HasAction="true" Action="PassQuest"/>
+    </Phrase>
+    <Phrase Text="Ну да, давненько. Дольше, чем хотелось бы" id="1">
+      <Answer Text="И мою маму знаешь давно?" next="2"/>
+    </Phrase>
+    <Phrase Text="А то, мы с ней давние друзья" id="2">
+      <Answer Text="Тогда скажи мне, правда ли, что я подкидыш? Правда ли, что она мне не родная мать?" next="3"/>
+    </Phrase>
+    <Phrase Text="М-да…С чего ты вдруг это взял?" id="3">
+      <Answer Text="так сказал" next="4"/>
+    </Phrase>
+    <Phrase Text="Нашел кого слушать. Он силен, но туп. Никогда не слушай его, понял? Никакой ты не подкидыш" id="4">
+      <Answer Text="Но…" next="5"/>
+    </Phrase>
+    <Phrase Text="тебя любит. Разве этого не достаточно?" id="5">
+      <Answer Text="Достаточно, но…" next="6"/>
+    </Phrase>
+    <Phrase Text="Ну и не нокай. Иди давай домой, да по сторонам гляди в оба." id="6">
+      <Answer Text="..." HasAction="true" Action="GotQuest"/>
+    </Phrase>
+  </Dialog>
+
+  <Dialog id="2">
+    <Phrase Text="О, ты вернулся. Все прошло нормально?" id="start">
+      <Answer Text="Да, ну то есть, почти" next="1"/>
+    </Phrase>
+    <Phrase Text="Что случилось?" id="1">
+      <Answer Text="встретил. И он…." next="2"/>
+    </Phrase>
+    <Phrase Text="Он что то плохое тебе сделал?" id="2">
+      <Answer Text="Нет. Он, ну, сказал, что меня подкинули и что ты не моя настоящая мама" next="3"/>
+    </Phrase>
+    <Phrase Text="..." id="3">
+      <Answer Text="Мама?" next="4"/>
+    </Phrase>
+    <Phrase Text="Давно тебе стоило это рассказать. Прости, что скрывала это от тебя. Я не хотела, чтоб ты это знал." id="4">
+      <Answer Text="..." next="5"/>
+    </Phrase>
+    <Phrase Text="Тебя действительно подкинули мне. Это было около 5-6 лет назад. Была ночь и лил сильный дождь. Я ложилась спать, как вдруг услышала детский крик на улице" id="5">
+      <Answer Text="Это был я?" next="6"/>
+    </Phrase>
+    <Phrase Text="Да, это был ты. Но это уже дело прошлого. Ты теперь мой сын и я тебя никому не отдам" id="6">
+      <Answer Text="Но, почему ты не говорила мне этого раньше?" next="7"/>
+    </Phrase>
+    <Phrase Text="Чтобы не травмировать тебя" id="7">
+      <Answer Text="Почему я узнаю это от других!?!" next="8"/>
+    </Phrase>
+    <Phrase Text="Сынок, успокойся" id="8">
+      <Answer Text="Я не твой сын!!!" next="9"/>
+    </Phrase>
+    <Phrase Text="Не говори такого! Ты теперь мой сын!" id="9">
+      <Answer Text="..." HasAction="true" Action="PassQuest"/>
+    </Phrase>
+  </Dialog>
+
+  <Dialog id="3">
+    <Phrase Text="Привет еще раз. Короче, иди туда то" id="start">
+      <Answer Text="Понял, уже иду" HasAction="true" Action="GotQuest"/>
+    </Phrase>
+  </Dialog>
+
+  <Dialog id="5">
+    <Phrase Text="Все, хватит, не могу больше…Ты победил" id="start">
+      <Answer Text="Чей район теперь?" next="1"/>
+    </Phrase>
+    <Phrase Text="Т-твой…твой" id="1">
+      <Answer Text="..." HasAction="true" Action="PassQuest"/>
+    </Phrase>
+  </Dialog>
+  
+</Dialogs>

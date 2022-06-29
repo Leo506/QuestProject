@@ -1,0 +1,2 @@
+delivery from 0 to 1 dialogs 1 -1 name Помощь маме description Мама попросила меня отнести старому <имя> немного еды, а то тот уже совсем плох
+spawn CutSceneTrigger pos 12,57 1 16,22 scene 0

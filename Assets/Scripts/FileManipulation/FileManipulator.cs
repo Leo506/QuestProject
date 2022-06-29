@@ -17,6 +17,19 @@ public class FileManipulator : IFileManipulator
         }
     }
 
+
+    public T ReadBinnaryFile<T>(string name)
+    {
+        T toReturn = default(T);
+        using (FileStream fs = File.OpenRead(Path.Combine(Application.persistentDataPath, name)))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            toReturn = (T)formatter.Deserialize(fs);
+        }
+
+        return toReturn;
+    }
+
     public void GetTextFileContent(string name, Action<string> methodOnLoad)
     {
         if (initialisierer == null)
@@ -29,6 +42,20 @@ public class FileManipulator : IFileManipulator
             }
         }
         initialisierer.StartCoroutine(LoadFileContent(name, methodOnLoad));
+    }
+
+
+    public string GetTextFileContent(string path)
+    {
+        var asset = Resources.Load<TextAsset>(path);
+
+        return asset.text;
+    }
+
+
+    public GameObject GetGameObject(string path)
+    {
+        return Resources.Load<GameObject>(path);
     }
 
     private IEnumerator LoadFileContent(string name, Action<string> methodOnLoad)
