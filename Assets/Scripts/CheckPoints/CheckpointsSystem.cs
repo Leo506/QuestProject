@@ -36,7 +36,7 @@ public class CheckpointsSystem
     public static void LoadCheckpoint()
     {
         var manip = new FileManipulator();
-        var point = manip.LoadBinnaryFile<Checkpoint>("Checkpoint.point");
+        var point = manip.ReadBinnaryFile<Checkpoint>("Checkpoint.point");
 
         //SceneManager.LoadScene(point.sceneName);
 

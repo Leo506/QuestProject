@@ -10,11 +10,10 @@ namespace QuestSystem
     public class QuestManager
     {
         public static int currentQuestID { get; private set; }
-        public static event System.Action QuestLoadedEvent;
 
         private static QuestLanguage.Quest currentQuest;
 
-        private static IFileManipulator fileManipulator;
+        private static FileManipulator fileManipulator;
 
         static QuestManager()
         {
@@ -30,36 +29,28 @@ namespace QuestSystem
         {
             currentQuestID++;
             Debug.Log("Current quest id: " + currentQuestID);
-            currentQuest.Destroy();
+
+            if (currentQuest != null)
+                currentQuest.Destroy();
             LoadQuest();
         }
 
 
         private static void LoadQuest()
         {
-            if (!File.Exists(Application.streamingAssetsPath + $"/Quest{currentQuestID}.txt"))
-                return;
+            string path = $"Quests/Quest{currentQuestID}";
+            
+            string questText = fileManipulator.GetTextFileContent(path);
 
-            fileManipulator.GetTextFileContent($"/Quest{currentQuestID}.txt", OnFileContentLoad);
-            var text = File.ReadAllText(Application.streamingAssetsPath + $"/Quest{currentQuestID}.txt");
-
-        }
-
-        private static void OnFileContentLoad(string content)
-        {
             var parser = new TextParser();
-            parser.Parse(content);
+            parser.Parse(questText);
 
-            QuestLanguage.Quest quest = parser.CreateQuest() as QuestLanguage.Quest;
+            Quest quest = parser.CreateQuest() as Quest;
 
             currentQuest = quest;
 
             if (currentQuest != null)
-            {
                 currentQuest.Start();
-                QuestLoadedEvent?.Invoke();
-            }
-
         }
 
         public static void PassQuest()

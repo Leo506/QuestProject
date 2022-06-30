@@ -16,7 +16,7 @@ namespace QuestLanguage
 
             int sceneNumber = int.Parse(parList[sceneIndex + 1]);
 
-            CutSceneTrigger trigger = Resources.Load<CutSceneTrigger>($"CutScene{sceneNumber}");
+            CutSceneTrigger trigger = Resources.Load<CutSceneTrigger>($"CutScenes/CutScene{sceneNumber}");
 
             GameObject.Instantiate(trigger).transform.position = pos;
         }
