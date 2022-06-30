@@ -77,6 +77,17 @@ public class FileManipulatorTests
     }
 
 
+    [Test]
+    public void GetGenericFileSuccess()
+    {
+        var file = new FileManipulator();
+
+        var result = file.GetFile<PathControl>("AllPath");
+
+        Assert.NotNull(result);
+    }
+
+
     [System.Serializable]
     struct TestStruct
     {

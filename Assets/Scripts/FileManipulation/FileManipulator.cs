@@ -42,4 +42,10 @@ public class FileManipulator
     {
         return Resources.Load<GameObject>(path);
     }
+
+
+    public T GetFile<T>(string path) where T : UnityEngine.Object
+    {
+        return Resources.Load<T>(path);
+    }
 }

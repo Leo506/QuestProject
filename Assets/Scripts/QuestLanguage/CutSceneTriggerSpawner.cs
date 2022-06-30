@@ -16,7 +16,9 @@ namespace QuestLanguage
 
             int sceneNumber = int.Parse(parList[sceneIndex + 1]);
 
-            CutSceneTrigger trigger = Resources.Load<CutSceneTrigger>($"CutScenes/CutScene{sceneNumber}");
+            var file = new FileManipulator();
+            var basePath = file.GetFile<PathControl>("AllPath").PathToCutScenes;
+            CutSceneTrigger trigger = Resources.Load<CutSceneTrigger>($"{basePath}/CutScene{sceneNumber}");
 
             GameObject.Instantiate(trigger).transform.position = pos;
         }

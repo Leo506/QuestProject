@@ -38,7 +38,8 @@ namespace QuestSystem
 
         private static void LoadQuest()
         {
-            string path = $"Quests/Quest{currentQuestID}";
+            string basePath = fileManipulator.GetFile<PathControl>("AllPath").PathToQuests;
+            string path = $"{basePath}/Quest{currentQuestID}";
             
             string questText = fileManipulator.GetTextFileContent(path);
 
