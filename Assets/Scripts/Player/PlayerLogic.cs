@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Components;
 
 namespace Player
 {
@@ -9,19 +10,15 @@ namespace Player
         public static event Action OnSetUsableObj;
         public static event Action OnUnsetUsableObj;
 
-        IUsable currentUsableObj;
-        bool isInited = false;
+        private IUsable currentUsableObj;
+        private bool isInited = false;
 
-        private void Start()
+        private MovementComponent movement;
+
+        Action<string>[] actions;
+
+        private void Awake()
         {
-            Init();
-        }
-
-
-        private void OnEnable()
-        {
-            if (isInited)
-                return;
             Init();
         }
 
@@ -31,7 +28,29 @@ namespace Player
             playerInput.Player.Enable();
             playerInput.Player.Using.performed += context => UseObj();
 
+            movement = GetComponent<MovementComponent>();
+            if (movement == null)
+                movement = gameObject.AddComponent<MovementComponent>();
+
+            actions = new Action<string>[]
+            {
+                id => movement?.StopMove(),
+                id => movement?.StartMove()
+            };
+
+            DialogSystem.DialogText.DialogStartEvent += actions[0];
+            DialogSystem.DialogText.DialogEndEvent += actions[1];
+            CutSceneTrigger.CutSceneStartEvent += movement.StopMove;
+
             isInited = true;
+        }
+
+
+        private void OnDestroy()
+        {
+            DialogSystem.DialogText.DialogStartEvent -= actions[0];
+            DialogSystem.DialogText.DialogEndEvent -= actions[1];
+            CutSceneTrigger.CutSceneStartEvent -= movement.StopMove;
         }
 
 

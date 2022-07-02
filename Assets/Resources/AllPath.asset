@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ade6c5477c8e5b4a8c93c60605907f9, type: 3}
   m_Name: AllPath
   m_EditorClassIdentifier: 
-  _pathToCutScenes: 
-  _pathToDialogs: 
-  _pathToMiniGames: 
-  _pathToQuests: 
+  _pathToCutScenes: CutScenes
+  _pathToDialogs: Dialogs
+  _pathToMiniGames: MiniGames
+  _pathToQuests: Quests
