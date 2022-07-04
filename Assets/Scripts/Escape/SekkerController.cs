@@ -15,10 +15,11 @@ namespace Escape
         // Start is called before the first frame update
         void Start()
         {
+            CheckpointsSystem.Init(); // TODO удалить
             seekers = FindObjectsOfType<Seeker>();
             seekersMovement = new NavMeshAgent[seekers.Length];
             for (int i = 0; i < seekers.Length; i++)
-                seekersMovement[i] = seekers[i].GetComponent<NavMeshAgent>();
+                seekersMovement[i] = seekers[i].agent;
         }
 
         // Update is called once per frame
@@ -26,11 +27,11 @@ namespace Escape
         {
             for (int i = 0; i < seekers.Length; i++)
             {
-                if (seekers[i].state == SeekerState.FOLLOWING)
+                if (seekers[i].State == SeekerState.FOLLOWING)
                 {
                     seekersMovement[i].SetDestination(player.transform.position);
                     if (seekersMovement[i].remainingDistance <= seekersMovement[i].stoppingDistance)
-                        player.Die();
+                        CheckpointsSystem.LoadCheckpoint();
                 }
                 else
                 {

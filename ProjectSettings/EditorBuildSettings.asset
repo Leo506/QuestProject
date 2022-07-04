@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BullyFight.unity
     guid: db18d5ef2add5f84cb7a5d7b610708d6
+  - enabled: 1
+    path: Assets/Scenes/EscapePrototype.unity
+    guid: 97af1e0ab4fe32b49a0f23edc630a545
   m_configObjects: {}

@@ -14,6 +14,8 @@ namespace Escape
 
         [SerializeField] private MeshFilter meshFilter;
 
+        [SerializeField] Seeker seeker;
+
         private Mesh mesh;
 
         private void OnDrawGizmos()
@@ -75,17 +77,28 @@ namespace Escape
             var angleOffset = angle / frequency;
             var startAngle = -angle / 2;
 
+            bool hasPlayer = false;
             for (int i = 0; i < frequency; i++)
             {
                 var dir = DirFromAngle(startAngle);
                 Ray ray = new Ray(transform.position, dir);
                 if (Physics.Raycast(ray, out RaycastHit hit, distance))
+                {
                     points[i] = hit.point;
+                    if (hit.collider.gameObject.tag == "Player")
+                    {
+                        seeker.State = SeekerState.FOLLOWING;
+                        hasPlayer = true;
+                    }
+                }
                 else
                     points[i] = transform.position + dir * distance;
 
                 startAngle += angleOffset;
             }
+
+            if (!hasPlayer)
+                seeker.State = SeekerState.FINDING;
 
             return points;
         }
