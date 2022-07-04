@@ -21,7 +21,8 @@ namespace QuestSystem
             QuestLanguage.Quest.QuestPassedEvent += OnQuestPass;
             fileManipulator = new FileManipulator();
             LoadQuest();
-            Debug.Log("Quest is loaded");
+
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += (arg1, arg2) => currentQuestID = 1; LoadQuest();
         }
 
 
@@ -30,14 +31,15 @@ namespace QuestSystem
             currentQuestID++;
             Debug.Log("Current quest id: " + currentQuestID);
 
-            if (currentQuest != null)
-                currentQuest.Destroy();
             LoadQuest();
         }
 
 
         private static void LoadQuest()
         {
+            if (currentQuest != null)
+                currentQuest.Destroy();
+
             string basePath = fileManipulator.GetFile<PathControl>("AllPath").PathToQuests;
             string path = $"{basePath}/Quest{currentQuestID}";
             
