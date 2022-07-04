@@ -13,6 +13,6 @@ namespace Escape
     public class Seeker : MonoBehaviour
     {
         [HideInInspector]
-        public SeekerState state; 
+        public SeekerState state;
     }
 }
