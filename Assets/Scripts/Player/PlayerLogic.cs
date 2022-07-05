@@ -16,6 +16,7 @@ namespace Player
         private MovementComponent movement;
 
         Action<string>[] actions;
+        Action<int> stopAction;
 
         private void Awake()
         {
@@ -38,9 +39,12 @@ namespace Player
                 id => movement?.StartMove()
             };
 
+            stopAction = index => movement.StopMove();
+
             DialogSystem.DialogText.DialogStartEvent += actions[0];
             DialogSystem.DialogText.DialogEndEvent += actions[1];
             CutSceneTrigger.CutSceneStartEvent += movement.StopMove;
+            Notes.NotesControl.NoteCollectedEvent += stopAction;
 
             isInited = true;
         }
@@ -51,6 +55,7 @@ namespace Player
             DialogSystem.DialogText.DialogStartEvent -= actions[0];
             DialogSystem.DialogText.DialogEndEvent -= actions[1];
             CutSceneTrigger.CutSceneStartEvent -= movement.StopMove;
+            Notes.NotesControl.NoteCollectedEvent += stopAction;
         }
 
 
