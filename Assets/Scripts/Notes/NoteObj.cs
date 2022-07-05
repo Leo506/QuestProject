@@ -11,6 +11,7 @@ namespace Notes
 
         public void Use()
         {
+            NotesControl.AddNewNote(NoteIndex);
             Destroy(this.gameObject);
         }
 
